@@ -1,3 +1,17 @@
+<?php
+//sdfghjk
+//zsdfghj
+//zsdfghjwertgyhujk
+
+
+/** 
+ * si eilute pasisveikina
+ */
+
+print 'labas';
+// print 'iki';
+
+?>
 <html>
     <head>
         <meta charset="UTF-8">
