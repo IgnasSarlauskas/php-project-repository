@@ -21,8 +21,9 @@ $timer = date('s');
         .explode {
             background-image :url(https://upload.wikimedia.org/wikipedia/commons/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg);
             background-size: cover;
-            height: 500px;
-            width: 500px;
+            height: 1000px;
+            width: 1000px;
+            margin: 0 auto;
         }
 
         p {
