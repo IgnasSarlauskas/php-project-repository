@@ -1,18 +1,17 @@
 <?php 
     date_default_timezone_set("Europe/Vilnius");
-//    print date('Y-m-d', strtotime('+1 week'));
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php print' PHP lydes ir ' . date('Y-m-d', strtotime('+1 day')); ?></title>
+        <title> PHP lydes ir <?php print date('Y-m-d', strtotime('+' . rand(0, 10) . 'years')); ?></title>
     </head>
     <body>
         <h1>
-            Ignas - PHP su manimi buvo ir <?php print date('H:i:s', strtotime('-1 hour')); ?> 
+            Ignas - galbut turesiu <?php print rand(1, 5); ?> vaiką(us)!
         </h1>
         <p>
-           <?php print date('Y', strtotime('+1 year ')); ?> ne uz kalnu !
+           D. Trump'as nebebus prezidentu: <?php print date('Y-m-d', strtotime('+' . rand(2, 10) . ' year ')); ?>
         </p>
         
     </body>
