@@ -1,8 +1,21 @@
 <?php
 
-$debt_not_acceptable = rand(101, 200);
-$debt = rand(201, 300);
-$debt_acceptable = rand(301, 400);
+$siukslines_turis = 40;
+$siuksliu_turis_per_d = 15;
+$max_kaupo_turis = rand(0,15);
+
+        
+$bendras_turis =  $siukslines_turis + $max_kaupo_turis;
+$dienu_skaicius = round($bendras_turis / $siuksliu_turis_per_d);
+
+
+
+print 'Po ' . $dienu_skaicius . 'dienu ' .  date('Y-m-d', strtotime('+' . $dienu_skaicius . 'day')) . ' pirk geliu ir sampano, jei nori isvengti knflikto '
+
+
+
+
+        
 
 ?>
 <html>
@@ -10,11 +23,6 @@ $debt_acceptable = rand(301, 400);
         <meta charset="UTF-8">
     </head>
     <body>
-        <div>
-            <h1>Skolos skaičiuoklė</h1>
-            <h3>Jei paėmei <?php print $debt; ?>eurų</h3>
-            <h3>Su dviem kabančiais grąžinsi <?php print $debt_acceptable; ?>eurų</h3>
-            <h3>Su vienu kabančiu grąžinsi <?php print $debt_not_acceptable; ?>eurų</h3>
-        </div>
+        
     </body>
 </html>
