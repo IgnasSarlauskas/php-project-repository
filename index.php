@@ -1,23 +1,16 @@
 <?php
 
-$string = 'tekstas';
-$int = 1;
-$bool = true;
-$null = null;
-
+$image = "https://i.ytimg.com/vi/zw0pF1sfnsA/hqdefault.jpg";
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8">
     </head>
-
     <body>
-        <ul>
-            <li>- String Tipas: <?php print $string; ?></li>
-            <li>- Integer Tipas: <?php print $int; ?></li>
-            <li>- Boolean Tipas: <?php print $bool; ?></li>
-            <li>- Null Tipas: <?php print $null; ?></li>
-        </ul>
+        <div><img src = "<?php print $image; ?>"</div>
+        <div><img src = "<?php print $image; ?>"</div>
+        <div><img src = "<?php print $image; ?>"</div>
+        <div><img src = "<?php print $image; ?>"</div>
     </body>
 </html>
