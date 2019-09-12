@@ -1,8 +1,8 @@
 <?php
 
-$debt_one = (rand(101, 200));
-$debt_two = (rand(201, 300));
-$debt_three = (rand(301, 400));
+$debt_one = rand(101, 200);
+$debt_two = rand(201, 300);
+$debt_three = rand(301, 400);
 
 ?>
 <html>
