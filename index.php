@@ -3,7 +3,7 @@
 $string = 'tekstas';
 $int = 1;
 $bool = true;
-$null = '';
+$null = null;
 
 ?>
 
@@ -14,10 +14,10 @@ $null = '';
 
     <body>
         <ul>
-            <li> - String Tipas: <?php print $string;?></li
-            <li> - Integer Tipas: <?php print $int;?></li>
-            <li> - Boolean Tipas: <?php print $bool;?></li>
-            <li> - Null Tipas: <?php print $null;?></li>
+            <li>- String Tipas: <?php print $string; ?></li>
+            <li>- Integer Tipas: <?php print $int; ?></li>
+            <li>- Boolean Tipas: <?php print $bool; ?></li>
+            <li>- Null Tipas: <?php print $null; ?></li>
         </ul>
     </body>
 </html>
