@@ -1,14 +1,31 @@
 <?php
 
-$siukslines_turis = 40;
-$siuksliu_turis_per_d = 15;
-$max_kaupo_turis = rand(0, 15);
+$distance = rand(50, 100);
+$consumption = 7.5;
+$price_1 = 1.3;
 
-$bendras_turis = $siukslines_turis + $max_kaupo_turis;
-$dienu_skaicius = floor($bendras_turis / $siuksliu_turis_per_d);
+$fuel_total = $distance / $consumption;
+$price_trip = $fuel_total * $price_1;
 
+$title_text = 'Keliones skaiciuokle ';
+$distance_text = 'Nuvaziuota distancija: ';
+$consumption_text_start = 'Sunaudota: ';
+$consumption_text_end = ' l. kuro.';
+$price_text_start = 'Sunaudota: ';
+$price_text_end = ' pinigu';
 
-print 'Po ' . $dienu_skaicius . 'dienu ' . date('Y-m-d', strtotime('+' . $dienu_skaicius . 'day')) . ' pirk geliu ir sampano, jei nori isvengti knflikto '
-        
 ?>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1><?php print $title_text; ?></h1>
+        <ul>
+            <li><?php print $distance_text . $distance; ?></li>
+            <li><?php print $consumption_text_start . $fuel_total . $consumption_text_end; ?></li>
+            <li><?php print $price_text_start . $price_trip . $price_text_end; ?></li>
+        </ul>
+    </body>
+</html>
 
