@@ -2,10 +2,10 @@
 
 $distance = rand(50, 100);
 $consumption = 7.5;
-$price_1 = 1.3;
+$price_l = 1.3;
 
-$fuel_total = $distance / $consumption;
-$price_trip = $fuel_total * $price_1;
+$fuel_total = ($distance * $consumption) / 100 ;
+$price_trip = $fuel_total * $price_l;
 
 $title_text = 'Keliones skaiciuokle ';
 $distance_text = 'Nuvaziuota distancija: ';
