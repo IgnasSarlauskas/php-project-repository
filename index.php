@@ -14,6 +14,7 @@ if ($sunny) {
 <html>
     <head>
         <meta charset="UTF-8" />
+        <title>Klases darbas</title>
     </head>
     <style>
         .sunny {
@@ -37,6 +38,7 @@ if ($sunny) {
         }
     </style>
     <body>
+    
         <img class ="<?php print $img; ?>">
         <p><?php print $text; ?></p>
     </body>
