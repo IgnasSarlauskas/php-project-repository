@@ -1,22 +1,11 @@
 <?php
 
-$grizai_velai = rand(0, 1);
-$grizai_isgeres = rand(0, 1);
+$sunny = rand(0, 1);
 
-$h1_text = 'Buitine Skaiciuokle';
-
-if ($grizai_velai && !$grizai_isgeres ) {
-    $text_outcome = 'Situacija: Grizai velai';
-    $text_outcome_2 = 'Isvada: Nemiegosi ant sofos';
-} elseif ($grizai_velai && $grizai_isgeres) {
-    $text_outcome = 'Situacija: Grizai velai ir isgeres';
-    $text_outcome_2 = 'Isvada: Miegosi ant sofos';
-} elseif ($grizai_isgeres && !$grizai_velai) {
-    $text_outcome = 'Situacija: Grizai isgeres';
-    $text_outcome_2 = 'Isvada: Nemiegosi ant sofos';
+if($sunny) {
+    $img = 'sunny' ;
 } else {
-    $text_outcome = 'Situacija: Nieko nepadarei';
-    $text_outcome_2 = 'Isvada: Nemiegosi ant sofos';
+    $img = 'rainy';
 }
 
 ?>
@@ -24,9 +13,24 @@ if ($grizai_velai && !$grizai_isgeres ) {
     <head>
         <meta charset="UTF-8" />
     </head>
+    <style>
+        .sunny {
+            background-image :url(http://www.cashadvance6online.com/data/archive/img/2313238826.png);
+            background-size: cover;
+            height: 500px;
+            width: 500px;
+            margin: 0 auto;
+        }
+        
+        .rainy {
+            background-image :url(http://s13.favim.com/orig/160903/book-books-cloud-cloudy-Favim.com-4697653.jpeg);
+            background-size: cover;
+            height: 500px;
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
     <body>
-        <h1><?php print $h1_text; ?></h1>
-        <h2><?php print $text_outcome; ?></h2>
-        <h3><?php print $text_outcome_2; ?></h3>
+        <div class="<?php print $img; ?>"></div>
     </body>
 </html>
