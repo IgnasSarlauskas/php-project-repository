@@ -6,13 +6,13 @@ $grizai_isgeres = rand(0, 1);
 $h1_text = 'Buitine Skaiciuokle';
 
 if ($grizai_velai) {
-    $text_outcome = 'Grizai velai';
+    $text_outcome = 'Situacija: Grizai velai';
 } elseif ($grizai_velai || $grizai_isgeres) {
-    $text_outcome = 'Grizai velai ir isgeres';
+    $text_outcome = 'Situacija: Grizai velai ir isgeres';
 } elseif ($grizai_isgeres) {
-    $text_outcome = 'Grizai isgeres';
+    $text_outcome = 'Situacija: Grizai isgeres';
 } else {
-    $text_outcome = 'Nieko nepadarei';
+    $text_outcome = 'Situacija: Nieko nepadarei';
 }
 
 ?>
