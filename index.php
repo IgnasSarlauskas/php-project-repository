@@ -2,10 +2,12 @@
 
 $sunny = rand(0, 1);
 
-if($sunny) {
-    $img = 'sunny' ;
+if ($sunny) {
+    $img = 'sunny';
+    $text = 'sauleta';
 } else {
     $img = 'rainy';
+    $text = 'debesuota';
 }
 
 ?>
@@ -19,18 +21,23 @@ if($sunny) {
             background-size: cover;
             height: 500px;
             width: 500px;
-            margin: 0 auto;
         }
-        
+
         .rainy {
             background-image :url(http://s13.favim.com/orig/160903/book-books-cloud-cloudy-Favim.com-4697653.jpeg);
             background-size: cover;
             height: 500px;
             width: 500px;
-            margin: 0 auto;
+        }
+
+        p {
+            display: inline-block;
+            position: relative; 
+            bottom: 250px;
         }
     </style>
     <body>
-        <div class="<?php print $img; ?>"></div>
+        <img class ="<?php print $img; ?>">
+        <p><?php print $text; ?></p>
     </body>
 </html>
