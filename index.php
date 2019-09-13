@@ -1,39 +1,27 @@
 <?php
 
-$distance = rand(100, 500);
-$consumption = 7.5;
-$price_1 = 1.3;
-$my_money = 20;
+$grizai_velai = rand(0, 1);
+$grizai_isgeres = rand(0, 1);
 
-$fuel_total = $distance * $consumption / 100;
-$price_trip = $fuel_total * $price_1;
+$h1_text = 'Buitine Skaiciuokle';
 
-$title = 'Kelionės skaičiuoklė';
-$text_1 = "Nuvažiuota distancija: $distance";
-$text_2 = "Sunaudota $fuel_total l. kuro";
-$text_3 = "Kaina: $price_trip pinigų";
-$text_4 = "Turimi pinigai: $my_money $";
-
-
-if ($my_money >= $price_trip) {
-    $text_p = 'Isvada: Kelione iperkama';
+if ($grizai_velai) {
+    $text_outcome = 'Grizai velai';
+} elseif ($grizai_velai || $grizai_isgeres) {
+    $text_outcome = 'Grizai velai ir isgeres';
+} elseif ($grizai_isgeres) {
+    $text_outcome = 'Grizai isgeres';
 } else {
-    $text_p = 'Isvada: Kelione neiperkama';
+    $text_outcome = 'Nieko nepadarei';
 }
 
 ?>
 <html>
     <head>
-        
+        <meta charset="UTF-8" />
     </head>
-     <body>
-        <ul>
-            <li><?php print $text_1; ?></li>
-            <li><?php print $text_2; ?></li>
-            <li><?php print $text_3; ?></li>
-            <li><?php print $text_4; ?></li>
-            <hr>
-            <p><?php print $text_p; ?></p>
-        </ul>
+    <body>
+        <h1><?php print $h1_text; ?></h1>
+        <h2><?php print $text_outcome; ?></h2>
     </body>
 </html>
