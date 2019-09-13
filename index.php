@@ -38,7 +38,6 @@ if ($sunny) {
         }
     </style>
     <body>
-    
         <img class ="<?php print $img; ?>">
         <p><?php print $text; ?></p>
     </body>
