@@ -1,9 +1,9 @@
 <?php
+
 $days = 365;
 $pack_price = 3.5;
 $count_ttl = 0;
-
-$count_mon_thu = 0;
+$time_per_cig = 300;
 
 for ($i = 0; $i < $days; $i++) {
 
@@ -19,23 +19,22 @@ for ($i = 0; $i < $days; $i++) {
         $cigs_sun = rand(1, 5);
         $count_ttl += $cigs_sun;
     }
-   
-    if ($present_day <= 4) {
-        $cigs_mon_thu = rand(3, 4);
-        $count_mon_thu += $cigs_mon_thu;
-    } else {
-        $count_mon_thu += 0;
-    }
 }
 
+$time_in_seconds = $count_ttl * $time_per_cig;
 
-$price_ttl = $count_ttl / 20 * $pack_price;
+//$time_total = gmdate("H:i:s", $time_in_seconds);
 
-$price_mon_thu_ttl = $count_mon_thu / 20 * $pack_price;
-$price_mon_thu = $price_ttl - $price_mon_thu_ttl;
+$seconds = $time_in_seconds ;
+$hours = floor($seconds / 3600);
+$seconds -= $hours * 3600;
+$minutes = floor($seconds / 60);
+$seconds -= $minutes * 60;
 
-$h2_text = "Per $days dienas, surūkysiu $count_ttl cigarečių už $price_ttl eur.";
-$h2_text_2 = "Jei nerukyciau darbo dienomis, sutaupyciau $price_mon_thu euru";
+$time_total = "$hours:$minutes:$seconds";
+
+$h3_text = "Is viso traukdamas prastovesiu $time_total valandu";
+
 ?>
 <html>
     <head>
@@ -43,6 +42,6 @@ $h2_text_2 = "Jei nerukyciau darbo dienomis, sutaupyciau $price_mon_thu euru";
     </head>
     <body>
         <h1>Dumu skaiciuokle</h1>
-        <h2><?php print $h2_text_2; ?></h2>
+        <h2><?php print $h3_text; ?></h2>
     </body>
 </html>
