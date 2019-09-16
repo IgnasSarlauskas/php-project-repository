@@ -2,8 +2,8 @@
 
 $kates = rand(1, 3);
 $sunys = rand(1, 3);
-
 $katasuniai = 0;
+
 for ($i = 1; $i <= $kates; $i++) {
     for ($b = 1; $b <= $sunys; $b++) {
         $pavyko = rand(0, 1);
