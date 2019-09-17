@@ -1,16 +1,20 @@
 <?php
 
 $grikiai = 5000;
-$per_day = rand(200, 500);
+$days = 0;
+$grikiai_start = $grikiai;
 
-
-for ($x = 0; $x < $grikiai; $x++) {
-    $days = floor($grikiai / $per_day);
+for ($per_day = rand(200, 500); $grikiai > 0; $days++) {
+    if ($grikiai < $per_day) {
+        break;
+    } else {
+        $grikiai -= $per_day;
+    }
 }
 
-$date = date('Y-m-d', strtotime(" + $days  days"));
-$h2_text = "Rasta grikiu: $grikiai g.";
-$h3_text = "Isgyvensiu dar $days dienas, iki $date";
+$end_date = date('Y-m-d', strtotime(" + $days  days"));
+$h2_text = "Rasta grikiu: $grikiai_start g.";
+$h3_text = "Isgyvensiu dar $days dienas, iki $end_date";
 
 ?>
 <html>
