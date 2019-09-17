@@ -6,10 +6,7 @@ $car_price_used = $car_price_new;
 $depreciation = 2; //% per month
 
 for ($i = 0; $i < $months; $i++) {
-
     $car_price_used -= ($car_price_used / 100 * $depreciation);
-   
-    
 }
 
 $depr_perc = round($car_price_used * 100 / $car_price_new);
