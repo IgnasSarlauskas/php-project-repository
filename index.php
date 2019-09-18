@@ -3,21 +3,21 @@
 $array = [
     'kiausiniai' => [
         [
-            'name' => 'dideli',
+            'size' => 'dideli',
             'amount' => 2,
         ],
         
     ],
     'baklazanas' => [
         [
-            'name' => 'mazas',
+            'size' => 'mazas',
             'amount' => 1,
         ],
         
     ],
     'grietines indelis' => [
         [
-            'name' => 'didelis',
+            'size' => 'didelis',
             'amount' => 1,
         ],
         
