@@ -4,15 +4,19 @@ $array = [];
 
 for ($i = 0; $i < 7; $i++) {
     $date = date('l', strtotime("+ $i days"));
-    $array[] = $date;
+//    $array[] = $date;
      
     if ($date == 'Saturday') {
-        $array[$i] = 'sleep day';
+        $array[$date] = 'sleep day' ;
+        
     } elseif ($date == 'Sunday' ) {
-        $array[$i] = 'church day';
+        $array[$date] = 'church day';
+        
     } else {
-        $array[$i] = 'Workday';
+        $array[$date] = 'Workday';
+        
     }
+    var_dump($date);
 }
 
 var_dump($array);
