@@ -1,23 +1,35 @@
 <?php
 
-$array = [
-    [   
-        'name' => 'kiausiniai',
-        'size' => 'dideli',
-        'amount' => 2,
+$characters_array = [
+    [
+        'name' => 'Petras_Pizdis',
+        'items' => [
+            [
+                'name' => 'Telefonas',
+                'status' => 'Pamestas',
+            ]
+        ]
     ],
     [
-        'name' => 'baklazanas',
-        'size' => 'mazas',
-        'amount' => 1,
+        'name' => 'Petras_Pizdis',
+        'items' => [
+            [
+                'name' => 'Telefonas',
+                'status' => 'Pamestas',
+            ]
+        ]
     ],
     [
-        'name' => 'grietines indelis',
-        'size' => 'didelis',
-        'amount' => 1,
-    ],
+        'name' => 'Petras_Pizdis',
+        'items' => [
+            [
+                'name' => 'Telefonas',
+                'status' => 'Pamestas',
+            ]
+        ]
+    ]
 ];
 
-var_dump($array);
+var_dump($characters_array);
 
 
