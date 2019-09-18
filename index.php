@@ -1,40 +1,32 @@
 <?php
 
 $items_array = [
-    'kiausiniai' => [
-        [
+    'top_shelf' => [
+        'kiausiniai' => [
             'name' => 'kiaušiniai',
             'quantity' => 2,
-        ]
-    ],
-    'grietines' => [
-        [
+        ],
+        'grietines' => [
             'name' => 'grietine',
             'quantity' => 1,
-        ]
-    ],
-    'jogurtai' => [
-        [
+        ],
+        'jogurtai' => [
             'name' => 'jogurtas',
             'quantity' => 2,
-        ]
+        ],
+        'zuvis' => [],
     ],
-    'zuvis' => [],
-    'pienas' => [
-        [
+    'bottom-shelf' => [
+        'pienas' => [
             'name' => 'pienas',
             'quantity' => 1,
-        ]
-    ],
-    'kefyras' => [],
-    'degtine' => [
-        [
+        ],
+        'kefyras' => [],
+        'degtine' => [
             'name' => 'degtine',
             'quantity' => 2,
-        ]
-    ],
-    'keciupas' => [
-        [
+        ],
+        'keciupas' => [
             'name' => 'keciupas',
             'quantity' => 2,
         ]
