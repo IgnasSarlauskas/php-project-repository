@@ -5,9 +5,9 @@ $array = [];
 for ($i = 0; $i < 7; $i++) {
     $date = date('l', strtotime("+ $i days"));
     $array[] = $date;
-     if ($array[$i] === 'Saturday') {
+     if ($date == 'Saturday') {
         $array[$i] = 'weekend';
-    } elseif ($array[$i] === 'Sunday' ) {
+    } elseif ($date == 'Sunday' ) {
         $array[$i] = 'weekend';
     };
 }
