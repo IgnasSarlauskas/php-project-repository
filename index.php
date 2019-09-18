@@ -1,35 +1,46 @@
 <?php
 
-$characters_array = [
-    [
-        'character' => 'Petras_Pizdis',
-        'items' => [
-            [
-                'name' => 'telefonas',
-                'status' => 'pamestas',
-            ]
+$items_array = [
+    'kiausiniai' => [
+        [
+            'name' => 'kiaušiniai',
+            'quantity' => 2,
         ]
     ],
-    [
-        'character' => 'Tomas_Ablomas',
-        'items' => [
-            [
-                'name' => 'bulijonas',
-                'status' => 'naudojamas',
-            ]
+    'grietines' => [
+        [
+            'name' => 'grietine',
+            'quantity' => 1,
         ]
     ],
-    [
-        'character' => 'Ana_Shitkova',
-        'items' => [
-            [
-                'name' => 'rulonas',
-                'status' => 'pasibaiges',
-            ]
+    'jogurtai' => [
+        [
+            'name' => 'jogurtas',
+            'quantity' => 2,
+        ]
+    ],
+    'zuvis' => [],
+    'pienas' => [
+        [
+            'name' => 'pienas',
+            'quantity' => 1,
+        ]
+    ],
+    'kefyras' => [],
+    'degtine' => [
+        [
+            'name' => 'degtine',
+            'quantity' => 2,
+        ]
+    ],
+    'keciupas' => [
+        [
+            'name' => 'keciupas',
+            'quantity' => 2,
         ]
     ]
 ];
 
-var_dump($characters_array);
+var_dump($items_array);
 
 
