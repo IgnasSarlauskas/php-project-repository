@@ -14,14 +14,20 @@ $items_array = [
             'name' => 'jogurtas',
             'quantity' => 2,
         ],
-        'zuvis' => [],
+        'zuvis' => [
+            'name' => 'zuvis',
+            'quantity' => 0,
+        ],
     ],
     'bottom-shelf' => [
         'pienas' => [
             'name' => 'pienas',
             'quantity' => 1,
         ],
-        'kefyras' => [],
+        'kefyras' => [
+            'name' => 'kefyras',
+            'quantity' => 0,
+        ],
         'degtine' => [
             'name' => 'degtine',
             'quantity' => 2,
