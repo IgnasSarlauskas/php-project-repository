@@ -12,7 +12,7 @@ $array = [
         'amount' => 1,
     ],
     [
-        'name' => 'grietines',
+        'name' => 'grietines indelis',
         'size' => 'didelis',
         'amount' => 1,
     ],
