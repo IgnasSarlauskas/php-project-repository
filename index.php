@@ -1,44 +1,18 @@
 <?php
 
-$items_array = [
-    'top_shelf' => [
-        'kiausiniai' => [
-            'name' => 'kiaušiniai',
-            'quantity' => 2,
-        ],
-        'grietines' => [
-            'name' => 'grietine',
-            'quantity' => 1,
-        ],
-        'jogurtai' => [
-            'name' => 'jogurtas',
-            'quantity' => 2,
-        ],
-        'zuvis' => [
-            'name' => 'zuvis',
-            'quantity' => 0,
-        ],
-    ],
-    'bottom-shelf' => [
-        'pienas' => [
-            'name' => 'pienas',
-            'quantity' => 1,
-        ],
-        'kefyras' => [
-            'name' => 'kefyras',
-            'quantity' => 0,
-        ],
-        'degtine' => [
-            'name' => 'degtine',
-            'quantity' => 2,
-        ],
-        'keciupas' => [
-            'name' => 'keciupas',
-            'quantity' => 2,
-        ]
-    ]
-];
+$my_memory = ['Penktadienis', 'paskaita', 'namai', 'zvanokas', 'draugeliui', '$alus++', '......', 'pirmadienis',];
+        
+?>
 
-var_dump($items_array);
-
-
+<html>
+    <head></head>
+    <body>
+        <h1>Kas buvo penktadieni?!</h1>
+        <h2>Igno atmintis</h2>
+        <ul>
+            <?php foreach ($my_memory as $value) : ?>
+                <li><?php print $value; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+</html>
