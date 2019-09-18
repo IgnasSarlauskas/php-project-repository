@@ -1,6 +1,6 @@
 <?php
 
-$my_memory = ['Penktadienis', 'paskaita', 'namai', 'zvanokas', 'draugeliui', '$alus++', '......', 'pirmadienis']
+$my_memory = ['penktadienis', 'paskaita', 'namai', 'zvanokas', 'draugeliui', '$alus++', '......', 'pirmadienis']
         
 ?>
 <html>
