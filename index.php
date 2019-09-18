@@ -2,30 +2,27 @@
 
 $characters_array = [
     [
-        'name' => 'Petras_Pizdis',
-        'items' => [
-            [
-                'name' => 'Telefonas',
-                'status' => 'Pamestas',
-            ]
+        'character' => 'Petras_Pizdis',
+        'items' =>
+        [
+            'name' => 'telefonas',
+            'status' => 'pamestas',
         ]
     ],
     [
-        'name' => 'Petras_Pizdis',
-        'items' => [
-            [
-                'name' => 'Telefonas',
-                'status' => 'Pamestas',
-            ]
+        'character' => 'Tomas_Ablomas',
+        'items' =>
+        [
+            'name' => 'bulijonas',
+            'status' => 'naudojamas',
         ]
     ],
     [
-        'name' => 'Petras_Pizdis',
-        'items' => [
-            [
-                'name' => 'Telefonas',
-                'status' => 'Pamestas',
-            ]
+        'character' => 'Ana_Shitkova',
+        'items' =>
+        [
+            'name' => 'rulonas',
+            'status' => 'pasibaiges',
         ]
     ]
 ];
