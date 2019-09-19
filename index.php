@@ -37,6 +37,9 @@ foreach ($bank_report as $transaction_key => $transaction) {
         .expense {
             color: red;
         }
+        li {
+            list-style-type: none;
+        }
     </style>
     <body>
         <h1>Banko ataskaita</h1>
