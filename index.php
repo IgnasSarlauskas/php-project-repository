@@ -44,10 +44,10 @@ foreach ($bank_report as $transaction_key => $transaction) {
     <body>
         <h1>Banko ataskaita</h1>
         <ul>
-            <?php foreach ($bank_report as $transaction_key => $transaction): ?>
-                <li class="<?php print $bank_report[$transaction_key]['css_class']; ?>">
-                    <?php print $bank_report[$transaction_key]['name']; ?>: 
-                    <?php print $bank_report[$transaction_key]['amount']; ?> eur
+            <?php foreach ($bank_report as  $transaction): ?>
+                <li class="<?php print $transaction['css_class']; ?>">
+                    <?php print $transaction['name']; ?>: 
+                    <?php print $transaction['amount']; ?> eur
                 </li>
             <?php endforeach; ?>
         </ul>
