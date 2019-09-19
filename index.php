@@ -1,37 +1,53 @@
 <?php
 
-$rasinys = [];
-$zodziai = [
-    'Petras',
-    'Lauke',
-    'Eilej',
-    'Maximoj',
-    'Nes',
-    'Baiges',
-    'Cizos',
-    'Bet',
-    'Nepardave',
-    'Nes',
-    'Petras',
-    'Neturi',
-    'Astuoniolikos'
+$rankinukas = [];
+
+$items = [
+    [
+        'name' => 'kremas',
+        'size' => 5,
+    ],
+    [
+        'name' => 'telefonas',
+        'size' => 10,
+    ],
+    [
+        'name' => 'akiniai',
+        'size' => 9,
+    ],
+    [
+        'name' => 'lupdazis',
+        'size' => 3,
+    ],
+    [
+        'name' => 'vaistai',
+        'size' => 3,
+    ],
 ];
 
-foreach($zodziai as $zodis) {
-    $rasinys[] = $zodziai[rand(0,sizeof($zodziai)-1)];
-} 
+foreach ($items as $item) {
+        $rankinukas[] = $items[rand(0, sizeof($items) - 1)]; 
+}
 
+$h1_text = 'Ka moteris turi rankinuke?';
 ?>
+
 <html>
     <body>
-        <h1>Lietuviu egzaminas</h1>
-        <p>
-        <?php foreach ($rasinys as $zodis): ?>
-        <?php print $zodis?> 
-        <?php endforeach; ?>
-        </p>
+        <h1><?php print $h1_text; ?></h1>
+        <ul>
+            <?php foreach ($rankinukas as $item): ?>
+                <li>
+                    <?php print $item['name']; ?> uzima 
+                    <?php print $item['size']; ?> cm3. 
+                </li>
+            <?php endforeach; ?>
+        </ul>
     </body>
 </html>
+
+
+
 
 
 
