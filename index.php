@@ -16,7 +16,7 @@ $bank_report = [
     [
         'name' => 'McDonalds Gedimino pr',
         'amount' => -20,
-    ]   
+    ]
 ];
 
 foreach ($bank_report as $transaction_key => $transaction) {
@@ -27,6 +27,30 @@ foreach ($bank_report as $transaction_key => $transaction) {
     }
 }
 
-var_dump($bank_report);
+?>
+
+<html>
+    <style>
+        .income {
+            color: green;
+        }
+        .expense {
+            color: red;
+        }
+    </style>
+    <body>
+        <h1>Banko ataskaita</h1>
+        <ul>
+            <?php foreach ($bank_report as $transaction_key => $transaction): ?>
+                <li class="<?php print $bank_report[$transaction_key]['css_class']; ?>">
+                    <?php print $bank_report[$transaction_key]['name']; ?>
+                    <?php print $bank_report[$transaction_key]['amount']; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+</html>
+
+
 
 
