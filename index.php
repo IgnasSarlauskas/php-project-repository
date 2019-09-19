@@ -46,8 +46,8 @@ foreach ($bank_report as $transaction_key => $transaction) {
         <ul>
             <?php foreach ($bank_report as $transaction_key => $transaction): ?>
                 <li class="<?php print $bank_report[$transaction_key]['css_class']; ?>">
-                    <?php print $bank_report[$transaction_key]['name']; ?>
-                    <?php print $bank_report[$transaction_key]['amount']; ?>
+                    <?php print $bank_report[$transaction_key]['name']; ?>: 
+                    <?php print $bank_report[$transaction_key]['amount']; ?> eur
                 </li>
             <?php endforeach; ?>
         </ul>
