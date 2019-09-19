@@ -1,24 +1,32 @@
 <?php
 
-$array = [];
+$bank_report = [
+    [
+        'name' => 'Iki Darbo Uzmokestis',
+        'amount' => 600,
+    ],
+    [
+        'name' => 'Kalvariju Nacnykas',
+        'amount' => -15,
+    ],
+    [
+        'name' => 'Opium Night Club',
+        'amount' => -230,
+    ],
+    [
+        'name' => 'McDonalds Gedimino pr',
+        'amount' => -20,
+    ]   
+];
 
-for ($i = 0; $i < 7; $i++) {
-    $date = date('l', strtotime("+ $i days"));
-//    $array[] = $date;
-     
-    if ($date == 'Saturday') {
-        $array[$date] = 'sleep day' ;
-        
-    } elseif ($date == 'Sunday' ) {
-        $array[$date] = 'church day';
-        
+foreach ($bank_report as $transaction_key => $transaction) {
+    if ($bank_report[$transaction_key]['amount'] < 0) {
+        $bank_report[$transaction_key]['css_class'] = 'expense';
     } else {
-        $array[$date] = 'Workday';
-        
+        $bank_report[$transaction_key]['css_class'] = 'income';
     }
-    var_dump($date);
 }
 
-var_dump($array);
+var_dump($bank_report);
 
 
