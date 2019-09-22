@@ -1,7 +1,6 @@
 <?php
 
 $rankinukas = [];
-
 $items = [
     [
         'name' => 'kremas',
