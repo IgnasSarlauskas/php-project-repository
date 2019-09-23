@@ -1,156 +1,57 @@
 <?php
-
-$thermometer = [
-    ['class' => 'bg-green', 'text' => 'PX'],
-    ['class' => 'bg-yellow', 'text' => 'BL'],
-    ['class' => 'bg-orange', 'text' => 'NX'],
-    ['class' => 'bg-red', 'text' => 'PZ2A'],    
+$natos = [
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'A',
+    'B'
 ];
 
-$stories = [
-    [
-        'class' => 'text-green',
-        'stories' => [
-            'Atsikėliau', 
-            'Prabudau', 
-            'Išlipau iš lovos'
-        ],
-    ],
-    [
-        'class' => 'text-yellow',
-        'stories' => [
-            'Vėl pirmadienis', 
-            'Apšalę mašinos langai', 
-            'Nėra ką valgyt pusryčiams'
-        ],
-    ],
-    [
-        'class' => 'text-orange',
-        'stories' => [
-            'Pavėlavau į darbo meetą', 
-            'Pamiršau cigaretes',
-            'Balandis apšiko švarką'
-        ],
-    ],   
-    [
-        'class' => 'text-red',
-        'stories' => [
-            'Užtvindžiau kaimynus', 
-            'Mane užtvindė kaimynai', 
-            'Sumaišiau panaudotą katės kraiką su šokoladu'
-        ],
-    ],
-];
+var_dump($natos);
+$natu_suma = count($natos);
 
-$target_state = rand(1, 4);
+//$root = rand(0, count($natos) - 1);
+var_dump($root);
 
-foreach ($thermometer as $state_idx => $state) {
-    if ($state_idx < $target_state) {
-        // Set Story
-        $story_idx = array_rand($stories[$state_idx]['stories']);        
-        $stories[$state_idx]['chosen_story'] = $stories[$state_idx]['stories'][$story_idx];
-    } else {
-        $thermometer[$state_idx]['class'] = 'white';
-        unset($stories[$state_idx]);
-    }
-
-    if ($state_idx !== $target_state) {
-        $thermometer[$state_idx]['name'] = '';
+$akordas = [];
+for ($i = 0; $i < 3; $i++) {
+    $root = rand(0, $natu_suma - 1);
+    for ($j = 0; $j < 3; $j++, $root += 2) {
+        if ($root >= $natu_suma) {
+            $nata = $root - $natu_suma;
+            $akordas[$i][$nata] = $natos[$nata];
+        } else {
+            $nata = $root;
+            $akordas[$i][$nata] = $natos[$nata];
+        }
     }
 }
 
+var_dump($akordas);
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Thermometer</title>
+        <title>Music</title>
         <style>
-            body {
-                background: black;
-            }
-            
-            .container {
-                display: flex;
-                align-items: center;
-            }
-
-            .thermo-circle, .thermo-box {                
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: bold; 
-                color: white;  
-                margin-left: 10px;                
-            }
-            
-            .thermo-circle {
-                width: 100px;
-                height: 100px;
-                background-color: green;
-                border-radius: 100%;            
-            }
-
-            .thermo-box {
-                width: 100px;
-                height: 50px;
-                border: 2px solid grey;                            
-            }
-
-
-            .bg-green {
-                background-color: green;
-            }
-
-            .bg-yellow {
-                background-color: #f3f309;
-            }
-
-            .bg-red {
-                background-color: red;
-            }
-
-            .bg-orange {
-                background-color: orange;
-            }
-
-            .bg-white {
-                background-color: white;
-            }
-            
-            .text-green {
-                color: green;
-            }
-            
-            .text-yellow {
-                color: yellow;
-            }
-            
-            .text-orange {
-                color:  orange;
-            }
-            
-            .text-red {
-                color: red;
+            div {
+                width: 45px;
+                height: 300px;
+                border: 1px solid black;
+                display: inline-block;
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="thermo-circle">0</div>
-            
-            <?php foreach ($thermometer as $state_idx => $state) : ?>
-                <div class="thermo-box <?php print $state['class']; ?>">
-                    <?php print $state['text']; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <ul>
-            <?php foreach ($stories as $story): ?>
-                <li class="<?php print $story['class']; ?>">
-                    <?php print $story['chosen_story']; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <div class="c">C</div>
+        <div class="d">D</div>
+        <div class="e">E</div>
+        <div class="f">F</div>
+        <div class="g">G</div>
+        <div class="a">A</div>
+        <div class="b">B</div>
     </body>
 </html>
