@@ -1,5 +1,4 @@
 <?php
-
 $drinks = [
     [
         'name' => 'Vilkmerges Alus',
@@ -28,9 +27,9 @@ $drinks = [
 ];
 
 foreach ($drinks as $drink_key => $drink) {
-    $drinks[$drink_key]['price_retail'] = $drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100);
+    $drinks[$drink_key]['price_retail'] = number_format($drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100), 2);
+    $drink_retail_price = number_format($drink['price_stock'], 2);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,14 +59,14 @@ foreach ($drinks as $drink_key => $drink) {
             } 
 
             .retail-price {
-                
+
                 background-color: #FF69B4;
                 color: white;
                 position: absolute;
                 top: 0;
                 right: 0;
             }
-            
+
             .stock-price {
                 background-color: grey;
                 color: white;
@@ -88,7 +87,7 @@ foreach ($drinks as $drink_key => $drink) {
             <?php foreach ($drinks as $drink_key => $drink): ?>
                 <div class ="drink-card">
                     <?php if ($drink['discount'] > 0) : ?>
-                        <div class="stock-price">$ <?php print $drink['price_stock']; ?></div>
+                        <div class="stock-price">$ <?php print $drink_retail_price; ?></div>
                     <?php endif; ?>
                     <div class="retail-price">$ <?php print $drink['price_retail']; ?></div>
                     <img src="<?php print $drink['img']; ?>" >
