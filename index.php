@@ -27,10 +27,16 @@ $drinks = [
     ],
 ];
 
+
+
 foreach ($drinks as $drink_key => $drink) {
     $drinks[$drink_key]['price_retail'] = number_format($drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100), 2);
     $drink_retail_price = number_format($drink['price_stock'], 2);
+    
+    $drinks[$drink_key]['in_stock'] = rand(0,1);
 }
+var_dump($drinks);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
