@@ -49,8 +49,6 @@ foreach ($drinks as $drink_key => $drink) {
             }
 
             .drink-card {
-                heigh: 420px;
-                width: 300px;
                 display: inline-block;
                 border: 1px solid black;
                 position: relative;
