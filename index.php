@@ -1,4 +1,5 @@
 <?php
+
 $drinks = [
     [
         'name' => 'Vilkmerges Alus',
@@ -67,6 +68,15 @@ foreach ($drinks as $drink_key => $drink) {
                 right: 0;
             }
 
+            .retail-price-bigger {
+                background-color: #FF69B4;
+                color: white;
+                position: absolute;
+                padding: 4px;
+                top: 0;
+                right: 0;
+            }
+
             .stock-price {
                 background-color: grey;
                 color: white;
@@ -88,8 +98,10 @@ foreach ($drinks as $drink_key => $drink) {
                 <div class ="drink-card">
                     <?php if ($drink['discount'] > 0) : ?>
                         <div class="stock-price">$ <?php print $drink_retail_price; ?></div>
+                        <div class="retail-price-bigger">$ <?php print $drink['price_retail']; ?></div>
+                    <?php else: ?>
+                        <div class="retail-price">$ <?php print $drink['price_retail']; ?></div>
                     <?php endif; ?>
-                    <div class="retail-price">$ <?php print $drink['price_retail']; ?></div>
                     <img src="<?php print $drink['img']; ?>" >
                     <p class="drink-name"><?php print $drink['name']; ?></p>
                 </div>
