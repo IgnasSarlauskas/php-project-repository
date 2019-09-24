@@ -4,7 +4,7 @@ $drinks = [
     [
         'name' => 'Vilkmerges Alus',
         'price_stock' => 3.6,
-        'discount' => 0,
+        'discount' => 0, //%
         'img' => 'https://www.barbora.lt/api/Images/GetInventoryImage?id=7acd8bad-f09a-470c-9646-e134ddeee5d7',
     ],
     [
@@ -31,8 +31,6 @@ foreach ($drinks as $drink_key => $drink) {
     $drinks[$drink_key]['price_retail'] = $drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100);
 }
 
-var_dump($drinks);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,11 +43,11 @@ var_dump($drinks);
                 align-items: center;
                 justify-content: space-between;
             }
-            
+
             h1 {
                 text-align: center;
             }
-            
+
             .drink-card {
                 heigh: 420px;
                 width: 300px;
@@ -63,13 +61,21 @@ var_dump($drinks);
                 width: 280px;
             } 
 
-            .drink-price {
-                float: right;
+            .retail-price {
+                
                 background-color: #FF69B4;
                 color: white;
                 position: absolute;
                 top: 0;
                 right: 0;
+            }
+            
+            .stock-price {
+                background-color: grey;
+                color: white;
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
             .drink-name {
@@ -83,7 +89,10 @@ var_dump($drinks);
         <div class="drinks-section">
             <?php foreach ($drinks as $drink_key => $drink): ?>
                 <div class ="drink-card">
-                    <div class="drink-price">$ <?php print $drink['price_retail']; ?></div>
+                    <?php if ($drink['discount'] > 0) : ?>
+                        <div class="stock-price">$ <?php print $drink['price_stock']; ?></div>
+                    <?php endif; ?>
+                    <div class="retail-price">$ <?php print $drink['price_retail']; ?></div>
                     <img src="<?php print $drink['img']; ?>" >
                     <p class="drink-name"><?php print $drink['name']; ?></p>
                 </div>
