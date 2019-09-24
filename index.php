@@ -27,15 +27,14 @@ $drinks = [
     ],
 ];
 
-
+$availability = 'Nera sandelyje';
 
 foreach ($drinks as $drink_key => $drink) {
     $drinks[$drink_key]['price_retail'] = number_format($drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100), 2);
     $drink_retail_price = number_format($drink['price_stock'], 2);
     
-    $drinks[$drink_key]['in_stock'] = rand(0,1);
+    $drinks[$drink_key]['in_stock'] = rand(0,1);  
 }
-var_dump($drinks);
 
 ?>
 <!DOCTYPE html>
@@ -58,6 +57,7 @@ var_dump($drinks);
                 display: inline-block;
                 border: 1px solid black;
                 position: relative;
+                height: 350px;
             }
 
             img {
@@ -94,6 +94,11 @@ var_dump($drinks);
             .drink-name {
                 text-align: center;
             }
+            
+            .availability {
+                color: red;
+                text-align: center;
+            }
 
         </style>
     </head>
@@ -110,6 +115,9 @@ var_dump($drinks);
                     <?php endif; ?>
                     <img src="<?php print $drink['img']; ?>" >
                     <p class="drink-name"><?php print $drink['name']; ?></p>
+                    <?php if (!$drink['in_stock']) : ?>
+                        <p class="availability"><?php print $availability; ?></p>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
