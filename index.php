@@ -10,7 +10,6 @@ $sum = sum($x, $y);
 $text = "$x ir $y suma: $sum";
 
 ?>
-
 <html>
     <body>
         <h1><?php print $text; ?></h1>
