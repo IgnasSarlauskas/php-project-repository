@@ -1,30 +1,36 @@
 <?php
 
-$x = 2;
+$people = [
+    [
+        'name' => 'Jonas',
+        'weight' => 100,
+    ],
+    [
+        'name' => 'Petras',
+        'weight' => 50,
+    ],
+    [
+        'name' => 'Tomas',
+        'weight' => 80,
+    ],
+    [
+        'name' => 'Kestis',
+        'weight' => 120,
+    ],
+    [
+        'name' => 'Algis',
+        'weight' => 90,
+    ],
+];
 
-function is_prime($x) {
-    if ($x == 1) {
-        return false;
-    } else {
-        for ($i = 2; $i <= $x / 2; $i++) {
-            if ($x % $i == 0) {
-                return false;
-            }
-            return true;
+function find_storas($people) {
+
+    foreach ($people as $person_key => $person) {
+        if ($people[$person_key]['weight'] > 90) {
+            $stori[] = $person['name'];
         }
     }
+    return var_dump($stori);
 }
 
-if (is_prime($x)) {
-    $text = "Skaicius $x yra pirminis";
-} else {
-    $text = "Skaicius $x nera pirminis";
-}
-
-?>
-
-<html>
-    <body>
-        <h1><?php print $text; ?></h1>
-    </body>
-</html>
+find_storas($people);
