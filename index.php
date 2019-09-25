@@ -1,125 +1,83 @@
 <?php
-
-$drinks = [
+$books = [
     [
-        'name' => 'Vilkmerges Alus',
-        'price_stock' => 3.6,
-        'discount' => 0, //%
-        'img' => 'https://www.barbora.lt/api/Images/GetInventoryImage?id=7acd8bad-f09a-470c-9646-e134ddeee5d7',
+        'title' => 'book 1',
+        'author' => 'author 1',
+        'year' => 2003,
+        'genre' => 'romance'
     ],
     [
-        'name' => 'Stumbro Degtine',
-        'price_stock' => 3.6,
-        'discount' => 5, //%
-        'img' => 'https://www.barbora.lt/api/Images/GetInventoryImage?id=e11360a3-0864-4441-b8da-9cbb8d189742',
+        'title' => 'book 2',
+        'author' => 'author 2',
+        'year' => 2008,
+        'genre' => 'biography'
     ],
     [
-        'name' => 'Svyturio Ekstra',
-        'price_stock' => 1.6,
-        'discount' => 0, //%
-        'img' => 'https://alko-msk.ru/wp-content/uploads/2019/02/ca57b8f0d2fd63ff148960ca99364fb3-67-300x300.png',
+        'title' => 'book 3',
+        'author' => 'author 3',
+        'year' => 2010,
+        'genre' => 'detective'
     ],
     [
-        'name' => 'Ajax Super Effect',
-        'price_stock' => 2.4,
-        'discount' => 25, //%
-        'img' => 'https://www.biurogidas.lt/image/cache/data/catalog/products/oday/117060_1-300x300.png',
+        'title' => 'book 4',
+        'author' => 'author 4',
+        'year' => 1999,
+        'genre' => 'detective'
+    ],
+    [
+        'title' => 'book 5',
+        'author' => 'author 5',
+        'year' => 2001,
+        'genre' => 'classic'
     ],
 ];
 
-$availability = 'Nera sandelyje';
-
-foreach ($drinks as $drink_key => $drink) {
-    $drinks[$drink_key]['price_retail'] = number_format($drink['price_stock'] - ($drink['price_stock'] * $drink['discount'] / 100), 2);
-    $drink_retail_price = number_format($drink['price_stock'], 2);
-    
-    $drinks[$drink_key]['in_stock'] = rand(0,1);  
-}
-
+var_dump($books);
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
     <head>
-        <meta charset="UTF-8">
-        <title>Geralai</title>
         <style>
-            .drinks-section {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
             }
 
-            h1 {
-                text-align: center;
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
             }
 
-            .drink-card {
-                display: inline-block;
-                border: 1px solid black;
-                position: relative;
-                height: 350px;
+            tr:nth-child(even) {
+                background-color: #dddddd;
             }
-
-            img {
-                height: 280px;
-                width: 280px;
-            } 
-
-            .retail-price {
-
-                background-color: #FF69B4;
-                color: white;
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-
-            .retail-price-bigger {
-                background-color: #FF69B4;
-                color: white;
-                position: absolute;
-                padding: 4px;
-                top: 0;
-                right: 0;
-            }
-
-            .stock-price {
-                background-color: grey;
-                color: white;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .drink-name {
-                text-align: center;
-            }
-            
-            .availability {
-                color: red;
-                text-align: center;
-            }
-
         </style>
     </head>
     <body>
-        <h1>Drink Catalogue</h1>
-        <div class="drinks-section">
-            <?php foreach ($drinks as $drink_key => $drink): ?>
-                <div class ="drink-card">
-                    <?php if ($drink['discount'] > 0) : ?>
-                        <div class="stock-price">$ <?php print $drink_retail_price; ?></div>
-                        <div class="retail-price-bigger">$ <?php print $drink['price_retail']; ?></div>
-                    <?php else: ?>
-                        <div class="retail-price">$ <?php print $drink['price_retail']; ?></div>
-                    <?php endif; ?>
-                    <img src="<?php print $drink['img']; ?>" >
-                    <p class="drink-name"><?php print $drink['name']; ?></p>
-                    <?php if (!$drink['in_stock']) : ?>
-                        <p class="availability"><?php print $availability; ?></p>
-                    <?php endif; ?>
-                </div>
+
+        <h2>Books</h2>
+
+        <table>
+            <thead>
+                <?php foreach ($books[0] as $book_idx => $value): ?> 
+                <th><?php print $book_idx; ?></th>
             <?php endforeach; ?>
-        </div>
-    </body>
+        </thead>
+        <tbody>
+            <tr>
+                <?php foreach ($books as $book): ?>
+                    <?php foreach ($book as $book_key => $value): ?>
+
+                        <td><?php print $value; ?></td>
+
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </tr>
+        </tbody>
+
+    </table>
+
+</body>
 </html>
