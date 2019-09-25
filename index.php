@@ -66,13 +66,21 @@ var_dump($books);
             <?php endforeach; ?>
         </thead>
         <tbody>
+
+            <?php foreach ($books[0] as $book_key => $value): ?>
+                <tr>
+                    <td><?php print $value; ?></td>
+                </tr>
+            <?php endforeach; ?>
+
             <tr>
-                <?php foreach ($books as $book): ?>
-                    <?php foreach ($book as $book_key => $value): ?>
-
-                        <td><?php print $value; ?></td>
-
-                    <?php endforeach; ?>
+                <?php foreach ($books[1] as $book_key => $value): ?>
+                    <td><?php print $value; ?></td>
+                <?php endforeach; ?>
+            </tr>
+            <tr>
+                <?php foreach ($books[2] as $book_key => $value): ?>
+                    <td><?php print $value; ?></td>
                 <?php endforeach; ?>
             </tr>
         </tbody>
