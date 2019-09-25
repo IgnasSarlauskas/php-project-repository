@@ -1,36 +1,12 @@
 <?php
 
-$people = [
-    [
-        'name' => 'Jonas',
-        'weight' => 100,
-    ],
-    [
-        'name' => 'Petras',
-        'weight' => 50,
-    ],
-    [
-        'name' => 'Tomas',
-        'weight' => 80,
-    ],
-    [
-        'name' => 'Kestis',
-        'weight' => 120,
-    ],
-    [
-        'name' => 'Algis',
-        'weight' => 90,
-    ],
-];
-
-function find_storas($people) {
-
-    foreach ($people as $person_key => $person) {
-        if ($people[$person_key]['weight'] > 90) {
-            $stori[] = $person['name'];
+function slot_run($size) {
+    for ($i = 1; $i <= $size; $i++) {
+        for ($j = 1; $j <= $size; $j++) {
+            $array[$i][$j] = rand(0, 1);
         }
     }
-    return var_dump($stori);
+    var_dump($array);
 }
 
-find_storas($people);
+slot_run(4);
