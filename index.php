@@ -1,21 +1,21 @@
 <?php
 
-$x = 9;
+$x = 2;
 
 function is_prime($x) {
     if ($x == 1) {
-        return 0;
+        return false;
     } else {
         for ($i = 2; $i <= $x / 2; $i++) {
             if ($x % $i == 0) {
-                return 0;
+                return false;
             }
+            return true;
         }
-        return 1;
     }
 }
 
-if (is_prime($x) == 1) {
+if (is_prime($x)) {
     $text = "Skaicius $x yra pirminis";
 } else {
     $text = "Skaicius $x nera pirminis";
