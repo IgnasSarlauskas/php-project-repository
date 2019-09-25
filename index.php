@@ -6,11 +6,23 @@ function slot_run($size) {
             $array[$i][$j] = rand(0, 1);
         }
     }
-    return $array;
+    $winner_array = [];
+    foreach ($array as $array_id => $section) {
+        foreach ($section as $value) {
+            $section_length = count($section);
+            $section_sum = array_sum($section);
+            if ($section_sum == $size) {
+                $winner_array[$array_id][] = $value;
+            } 
+        }
+    }
+
+    var_dump($winner_array);
+    return $array; $winner_array;
+    
 }
 
-$result = slot_run(5);
-
+$result = slot_run(4);
 var_dump($result);
 ?>
 
@@ -39,7 +51,7 @@ var_dump($result);
         <?php foreach ($result as $value): ?>
             <div class="container">
                 <?php foreach ($value as $key): ?>
-                    <?php if ($key == 0): ?>
+                    <?php if ($key == 1): ?>
                         <div class="yellow"></div>
                     <?php else: ?>
                         <div class="blue"></div>
