@@ -3,10 +3,12 @@
 function slot_run($size) {
     for ($i = 1; $i <= $size; $i++) {
         for ($j = 1; $j <= $size; $j++) {
-            $array[$i][$j] = rand(0, 1);
+           $array[$i][$j] = rand(0, 1);
+           
         }
     }
-    var_dump($array);
+    return $array;
 }
 
-slot_run(4);
+$result = slot_run(4);
+var_dump($result);
