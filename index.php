@@ -15,18 +15,29 @@ function find_winner_array($array) {
         foreach ($section as $value) {
             $section_length = count($section);
             $section_sum = array_sum($section);
-            if ($section_sum == $section_length ) {
+            if ($section_sum == $section_length) {
                 $winner_array[$array_id][] = $value;
-            } 
+            }
         }
     }
     return $winner_array;
 }
 
+function mark_winner_array($array) {
+    if (array_sum($array) !== count($array)){
+        return print 'winning-row';
+    }
+}
+
 $result = slot_run(4);
 var_dump($result);
+
 $winning_rows = find_winner_array($result);
 var_dump($winning_rows);
+
+$marked_winner_array = mark_winner_array($winning_rows);
+var_dump($marked_winner_array);
+
 ?>
 
 <html>
@@ -47,9 +58,13 @@ var_dump($winning_rows);
             width: 50px;
             border: 1px solid white;
         }
+        .winning-row {
+            border-top: 1px solid red;
+            border-bottom: 1px solid red;
+        }
     </style>
     <body>
-            <?php foreach ($result as $value): ?>
+        <?php foreach ($result as $value): ?>
             <div class="container">
                 <?php foreach ($value as $key): ?>
                     <?php if ($key == 1): ?>
@@ -57,8 +72,8 @@ var_dump($winning_rows);
                     <?php else: ?>
                         <div class="blue"></div>
                     <?php endif; ?>     
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </div> 
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </body>
 </html>
