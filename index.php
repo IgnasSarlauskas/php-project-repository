@@ -1,79 +1,115 @@
 <?php
+$books = [
+    [
+        'title' => 'book one',
+        'author' => 'author 1',
+        'year' => 2003,
+        'genre' => 'romance'
+    ],
+    [
+        'title' => 'book two',
+        'author' => 'author 2',
+        'year' => 2008,
+        'genre' => 'biography'
+    ],
+    [
+        'title' => 'book three',
+        'author' => 'author 3',
+        'year' => 2010,
+        'genre' => 'detective'
+    ],
+    [
+        'title' => 'book four',
+        'author' => 'author 4',
+        'year' => 1999,
+        'genre' => 'detective'
+    ],
+    [
+        'title' => 'book five',
+        'author' => 'author 5',
+        'year' => 2001,
+        'genre' => 'classic'
+    ],
+];
+var_dump($books);
 
-function slot_run($size) {
-    for ($i = 1; $i <= $size; $i++) {
-        for ($j = 1; $j <= $size; $j++) {
-            $array[$i][$j] = rand(0, 1);
-        }
-    }
-    return $array;
+foreach ($books as $book) {
+    $books_age_array[] = $book['year'];
+    $avg_books_age = array_sum($books_age_array) / count($books);
 }
 
-function find_winner_array($array) {
-    $winner_array = [];
-    foreach ($array as $array_id => $section) {
-        foreach ($section as $value) {
-            $section_length = count($section);
-            $section_sum = array_sum($section);
-            if ($section_sum == $section_length) {
-                $winner_array[$array_id][] = $value;
-            }
-        }
-    }
-    return $winner_array;
+$avg_age_output = "Average age of all books is $avg_books_age year";
+var_dump($avg_books_age);
+
+//Sortina pagal pavadinima
+
+function method1($a, $b) {
+    return ($a['title'] <= $b['title']) ? -1 : 1;
 }
 
-function mark_winner_array($array) {
-    if (array_sum($array) !== count($array)){
-        return print 'winning-row';
-    }
+usort($books, "method1");
+var_dump($books);
+
+//sortina pagal metus
+
+function method2($a, $b) {
+    return ($a['year'] <= $b['year']) ? -1 : 1;
 }
-
-$result = slot_run(4);
-var_dump($result);
-
-$winning_rows = find_winner_array($result);
-var_dump($winning_rows);
-
-$marked_winner_array = mark_winner_array($winning_rows);
-var_dump($marked_winner_array);
+usort($books, "method2");
+var_dump($books);
 
 ?>
 
 <html>
-    <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .yellow {
-            background-color: yellow;
-            height: 50px;
-            width: 50px;
-            border: 1px solid white;
-        }
-        .blue {
-            background-color: blue;
-            height: 50px;
-            width: 50px;
-            border: 1px solid white;
-        }
-        .winning-row {
-            border-top: 1px solid red;
-            border-bottom: 1px solid red;
-        }
-    </style>
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            th {
+                background-color: black;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+            .flex-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        </style>
+    </head>
     <body>
-        <?php foreach ($result as $value): ?>
-            <div class="container">
-                <?php foreach ($value as $key): ?>
-                    <?php if ($key == 1): ?>
-                        <div class="yellow"></div>
-                    <?php else: ?>
-                        <div class="blue"></div>
-                    <?php endif; ?>     
+
+        <h2 class="text-center">Books</h2>
+
+        <table>
+            <thead>
+            <?php foreach ($books[0] as $book_id => $value): ?> 
+                <th><?php print $book_id; ?></th>
+            <?php endforeach; ?>
+        </thead>
+        <tbody>
+                <?php foreach ($books as $book): ?>
+                    <tr>
+                        <?php foreach ($book as $book_id => $value): ?>
+                            <td><?php print $value; ?></td>
+                        <?php endforeach; ?>
+                    </tr>
                 <?php endforeach; ?>
-            </div> 
-        <?php endforeach; ?>
-    </body>
+        </tbody>
+    </table>
+    <h3><?php print $avg_age_output; ?></h3>
+</body>
 </html>
