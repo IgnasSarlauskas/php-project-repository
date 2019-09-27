@@ -3,7 +3,6 @@
 $sheeps = ['blee'];
 
 for ($i = 0; $i < 5; $i++) {
-    $sheeps[] = &$sheeps[0];
+    $sheeps[$i] = 'miksmakalekst';
 }
-
 var_dump($sheeps);
