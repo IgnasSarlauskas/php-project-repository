@@ -1,8 +1,11 @@
 <?php
 
-$sheeps = ['blee'];
-
-for ($i = 0; $i < 5; $i++) {
-    $sheeps[$i] = 'miksmakalekst';
+$sheep = ['blee'];
+for ($i = 0; $i < 4; $i++) {
+    $sheep[] = &$sheep[0];
 }
-var_dump($sheeps);
+
+for ($i = 0; $i < 4; $i++) {
+    $sheep[$i]='mikstmakaleskt';
+}
+var_dump($sheep);
