@@ -2,10 +2,8 @@
 
 $sheep = ['blee'];
 for ($i = 0; $i < 4; $i++) {
-    $sheep[] = &$sheep[0];
+    $sheep[] = &$sheep[$i];
 }
 
-for ($i = 0; $i < 4; $i++) {
-    $sheep[$i]='mikstmakaleskt';
-}
+$sheep[] = 'mikstmakaleskt';
 var_dump($sheep);
