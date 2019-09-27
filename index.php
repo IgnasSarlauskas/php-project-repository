@@ -1,7 +1,9 @@
 <?php
 
-$x = 0;
-$b = &$x;
-unset($b);
-$b = 1;
-print $x;
+$sheeps = ['blee'];
+
+for ($i = 0; $i < 5; $i++) {
+    $sheeps[] = &$sheeps[0];
+}
+
+var_dump($sheeps);
