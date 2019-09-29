@@ -2,13 +2,16 @@
 
 $array = ['b', 'x', 'x', 'b', 's'];
 
-function count_values($array, $val) {
-    foreach ($array as $value) {
-        if ($value == $val) {
-           $same_values_array[] = $value;
+function change_values(&$array, &$val_from, &$val_to) {
+    foreach ($array as &$value) {
+        if ($value == $val_from) {
+           $value = $val_to;
         }
     }
-    $count = count($same_values_array);
-    return $count;
 }
-print count_values($array, 's');
+
+$val_from = 'b';
+$val_to = 'a';
+print change_values($array, $val_from, $val_to);
+
+var_dump ($array);
