@@ -1,9 +1,14 @@
 <?php
 
-$sheep = ['blee'];
+$sheeps = ['blee'];
+
 for ($i = 0; $i < 4; $i++) {
-    $sheep[] = &$sheep[$i];
+    $sheeps[] = &$sheeps[$i];
+}
+foreach ($sheeps as $i => $sheep) {
+    unset($sheeps[$i]);
+    $sheeps[$i] = $sheep; 
 }
 
-$sheep[] = 'mikstmakaleskt';
-var_dump($sheep);
+$sheeps[2] = 'fuk da system';
+var_dump($sheeps);
