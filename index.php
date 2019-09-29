@@ -1,14 +1,14 @@
 <?php
 
-$sheeps = ['blee'];
+$array = ['b', 'x', 'x', 'b', 's'];
 
-for ($i = 0; $i < 4; $i++) {
-    $sheeps[] = &$sheeps[$i];
+function count_values($array, $val) {
+    foreach ($array as $value) {
+        if ($value == $val) {
+           $same_values_array[] = $value;
+        }
+    }
+    $count = count($same_values_array);
+    return $count;
 }
-foreach ($sheeps as $i => $sheep) {
-    unset($sheeps[$i]);
-    $sheeps[$i] = $sheep; 
-}
-
-$sheeps[2] = 'fuk da system';
-var_dump($sheeps);
+print count_values($array, 's');
