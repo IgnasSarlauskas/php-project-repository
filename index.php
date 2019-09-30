@@ -1,25 +1,22 @@
 <?php
 
-$number_pow = 0;
+$answer = 0;
 
-function square($x) {
-    return $_POST['number'] ** 2;
+function add_one($x) {
+    return $_POST['submit'] + 1;
 }
 
 if (isset($_POST['submit'])) {
-    $number_pow = square($_POST['number']);
+    $answer = add_one($_POST['submit']);
 } 
 
 var_dump($_POST);
 
 ?>
-
 <html>
     <body>
         <form method = "POST">
-            Pakelti kvadratu: <input name="number" type = "number" required/>
-            <input name="submit" type ="submit"/>
+            <input name="submit" type ="submit" value="<?php print $answer; ?>"/>
         </form>
-        <h2>Atsakymas : <?php print $number_pow; ?></h2>
     </body>
 </html>
