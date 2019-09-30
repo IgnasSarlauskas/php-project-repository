@@ -1,17 +1,25 @@
 <?php
 
-$array = ['b', 'x', 'x', 'b', 's'];
+$number_pow = 0;
 
-function change_values(&$array, &$val_from, &$val_to) {
-    foreach ($array as &$value) {
-        if ($value == $val_from) {
-           $value = $val_to;
-        }
-    }
+function square($x) {
+    return $_POST['number'] ** 2;
 }
 
-$val_from = 'b';
-$val_to = 'a';
-print change_values($array, $val_from, $val_to);
+if (isset($_POST['submit'])) {
+    $number_pow = square($_POST['number']);
+} 
 
-var_dump ($array);
+var_dump($_POST);
+
+?>
+
+<html>
+    <body>
+        <form method = "POST">
+            Pakelti kvadratu: <input name="number" type = "number" required/>
+            <input name="submit" type ="submit"/>
+        </form>
+        <h2>Atsakymas : <?php print $number_pow; ?></h2>
+    </body>
+</html>
