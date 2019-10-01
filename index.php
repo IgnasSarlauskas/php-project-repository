@@ -8,13 +8,19 @@ $form = [
     ],
     'fields' => [
         'first-name' => [
-            'name' => 'test',
+            'type' => 'text',
+            'placeholder' => 'Your Name',
             'label' => 'Your Name',
             'error' => 'klaida',
         ],
         'last-name' => [
-            'name' => 'test-1',
-            'label' => 'Your Surname',
+            'type' => 'text',
+            'placeholder' => 'Your Surname',
+        ],
+        
+        'email' => [
+            'type' =>  'email',
+            'placeholder' => 'Enter Email',
         ]
     ],
     'buttons' => [
