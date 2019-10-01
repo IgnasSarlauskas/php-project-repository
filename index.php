@@ -30,7 +30,7 @@ function html_attr($attr) {
             '@value' => $value
         ]);
     }
-    return implode(' ', $attr_array);
+    return implode(" ", $attr_array);
 }
 
 ?>
