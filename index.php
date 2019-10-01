@@ -1,5 +1,4 @@
 <?php
-
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -8,15 +7,18 @@ $form = [
         'id' => 'login-form'
     ],
     'fields' => [
-        [
-            'name' => 'test'
+        'first-name' => [
+            'name' => 'test',
+            'label' => 'Your Name',
+            'error' => 'klaida',
         ],
-        [
-            'type' => 'test-1'
+        'last-name' => [
+            'name' => 'test-1',
+            'label' => 'Your Surname',
         ]
     ],
     'buttons' => [
-        [
+        'submit' => [
             'name' => 'test',
             'class' => 'test-1',
         ]
@@ -32,7 +34,6 @@ function html_attr($attr) {
     }
     return implode(" ", $attr_array);
 }
-
 ?>
 <html>
     <body>
