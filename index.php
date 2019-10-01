@@ -1,4 +1,5 @@
 <?php
+
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -10,25 +11,34 @@ $form = [
         'first-name' => [
             'type' => 'text',
             'placeholder' => 'Your Name',
-            'label' => 'Your Name',
-            'error' => 'klaida',
+            'label' => 'Name',
+            'error' => 'error',
         ],
         'last-name' => [
             'type' => 'text',
             'placeholder' => 'Your Surname',
+            'label' => 'Surname'
         ],
         
-        'email' => [
-            'type' =>  'email',
-            'placeholder' => 'Enter Email',
+        'number' => [
+            'type' =>  'number',
+            'placeholder' => 'Enter your number',
+            'label' => 'Phone Number',
         ]
     ],
     'buttons' => [
         'submit' => [
-            'name' => 'test',
-            'class' => 'test-1',
+            'type' => 'button',
+        ],
+        'reset' => [
+            'type' => 'button',
         ]
+    ],
+    
+    'message' => [
+        'Name field must be filled',
     ]
+    
 ];
 
 function html_attr($attr) {
@@ -41,7 +51,13 @@ function html_attr($attr) {
     return implode(" ", $attr_array);
 }
 ?>
+
 <html>
+    <style>
+        .color-red {
+            color: red;
+        }
+    </style>
     <body>
         <?php require 'templates/form.tpl.php'; ?>
     </body>
