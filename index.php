@@ -1,5 +1,4 @@
 <?php
-
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -9,21 +8,35 @@ $form = [
     ],
     'fields' => [
         'first-name' => [
-            'type' => 'text',
-            'placeholder' => 'Your Name',
-            'label' => 'Name',
-            'error' => 'error',
+            'attr' => [
+                'type' => 'text',
+                'name' => 'first-name',
+            ],
+            'extra_attr' => [
+                'placeholder' => 'Your Name',
+                'label' => 'Name',
+                'error' => 'error',
+            ],
         ],
         'last-name' => [
-            'type' => 'text',
-            'placeholder' => 'Your Surname',
-            'label' => 'Surname'
+            'attr' => [
+                'type' => 'text',
+                'name' => 'last-name',
+            ],
+            'extra_attr' => [
+                'placeholder' => 'Your Surname',
+                'label' => 'Surname'
+            ]
         ],
-        
         'number' => [
-            'type' =>  'number',
-            'placeholder' => 'Enter your number',
-            'label' => 'Phone Number',
+            'attr' => [
+                'type' => 'number',
+                'name' => 'number',
+            ],
+            'extra_attr' => [
+                'placeholder' => 'Enter your number',
+                'label' => 'Phone Number',
+            ]
         ]
     ],
     'buttons' => [
@@ -34,11 +47,9 @@ $form = [
             'type' => 'button',
         ]
     ],
-    
     'message' => [
         'Name field must be filled',
     ]
-    
 ];
 
 function html_attr($attr) {
