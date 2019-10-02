@@ -10,33 +10,44 @@ $form = [
         'first-name' => [
             'attr' => [
                 'type' => 'text',
-                'name' => 'first-name',
             ],
             'extra_attr' => [
-                'placeholder' => 'Your Name',
-                'label' => 'Name',
-                'error' => 'error',
+                'placeholder' => 'Your Name', 
             ],
+            'label' => 'Name',
+//            'error' => 'error',
         ],
         'last-name' => [
             'attr' => [
                 'type' => 'text',
-                'name' => 'last-name',
             ],
             'extra_attr' => [
                 'placeholder' => 'Your Surname',
-                'label' => 'Surname'
-            ]
+            ],
+            'label' => 'Surname',
+        ],
+        'status' => [
+            'attr' => [
+                'type' => 'select',
+            ],
+            'extra_attr' => [
+                'placeholder' => 'Your Status',
+            ],
+            'options' => [
+               'single' => 'Single',
+               'married' => 'Married',
+               'divorced' => 'Divorced',
+            ],
+            'label' => 'Your Status',
         ],
         'number' => [
             'attr' => [
                 'type' => 'number',
-                'name' => 'number',
             ],
             'extra_attr' => [
                 'placeholder' => 'Enter your number',
-                'label' => 'Phone Number',
-            ]
+            ],
+            'label' => 'Phone Number',
         ]
     ],
     'buttons' => [
