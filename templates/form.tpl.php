@@ -3,7 +3,7 @@
 
         <!--Form Title-->	
         <?php if (isset($form['title'])): ?>
-            <h2><?php print $form['title'] ?></h2>
+            <h2><?php print $form['title']; ?></h2>
         <?php endif; ?>
 
         <!--Start Field Generation-->

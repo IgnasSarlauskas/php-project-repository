@@ -1,4 +1,6 @@
 <?php
+var_dump($_POST);
+
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -12,7 +14,7 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Aurimas',
+                    'placeholder' => 'Enter Name',
                     'class' => 'input-text',
                     'id' => 'first-name'
                 ]
@@ -26,7 +28,7 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Stecenka',
+                    'placeholder' => 'Enter Surname',
                     'class' => 'input-text',
                     'id' => 'last-name'
                 ]
@@ -83,6 +85,21 @@ function html_attr($attr) {
 
     return implode(' ', $html_attr_array);
 }
+
+function get_filtered_input($field_indexes) {
+
+    $filter_parameters = [];
+ 
+    foreach ($field_indexes as $value) {
+        $filter_parameters[$value] = FILTER_SANITIZE_SPECIAL_CHARS;
+    }  
+    return filter_input_array(INPUT_POST, $filter_parameters);
+}
+
+$filtered_input = get_filtered_input(['first_name', 'last_name']);
+
+var_dump($filtered_input);
+
 ?>
 <html>
     <head>
@@ -91,6 +108,9 @@ function html_attr($attr) {
         <link rel="stylesheet" href="includes/styles.css">
     </head>
     <body>
-<?php require 'templates/form.tpl.php'; ?>
+<!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
+        <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
+        <h2><?php print $_POST['wish'] ?? ''; ?></h2>
+        <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
