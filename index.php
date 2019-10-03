@@ -102,19 +102,26 @@ function html_attr($attr) {
     return implode(' ', $html_attr_array);
 }
 
+/**
+ * Generates safe input array using FILTER_SANITIZE_SPECIAL_CHARS and FILTER_SANITIZE_NUMBER_INT
+ * @param array $form array
+ * @return array
+ */
 function get_filtered_input($form) {
 
     $filter_parameters = [];
 
     foreach ($form['fields'] as $id => $value) {
-        
+        $value['value'] == '';
         if (isset($value['filter']) ) {
             $filter_parameters[$id] = $value['filter'];
         } else {
             $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
         }
     }
+    
     return filter_input_array(INPUT_POST, $filter_parameters);
+    
 }
 
 $filtered_input = get_filtered_input($form);
