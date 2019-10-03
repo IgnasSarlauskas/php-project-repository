@@ -86,17 +86,17 @@ function html_attr($attr) {
     return implode(' ', $html_attr_array);
 }
 
-function get_filtered_input($field_indexes) {
+function get_filtered_input($form) {
 
     $filter_parameters = [];
  
-    foreach ($field_indexes as $value) {
-        $filter_parameters[$value] = FILTER_SANITIZE_SPECIAL_CHARS;
+    foreach ($form['fields'] as $id => $value) {
+        $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
     }  
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-$filtered_input = get_filtered_input(['first_name', 'last_name']);
+$filtered_input = get_filtered_input($form);
 
 var_dump($filtered_input);
 
