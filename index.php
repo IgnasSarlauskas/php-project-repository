@@ -20,7 +20,8 @@ $form = [
                 ]
             ],
             'label' => 'Vardas:',
-            'error' => 'Vardas per trumpas!'
+            'error' => 'Vardas per trumpas!',
+            'filter' => FILTER_SANITIZE_NUMBER_INT,
         ],
         'last_name' => [
             'attr' => [
@@ -35,6 +36,21 @@ $form = [
             ],
             'label' => 'Pavardė:',
             'error' => 'Paliktas tuščias laukas!'
+        ],
+        'number' => [
+            'attr' => [
+                'type' => 'number'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Enter Contact Number',
+                    'class' => 'input-number',
+                    'id' => 'contact-number'
+                ]
+            ],
+            'label' => 'Kontaktinis numeris:',
+            'error' => 'Paliktas tuščias laukas!',
+            
         ],
         'wish' => [
             'attr' => [
@@ -89,17 +105,21 @@ function html_attr($attr) {
 function get_filtered_input($form) {
 
     $filter_parameters = [];
- 
+
     foreach ($form['fields'] as $id => $value) {
-        $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
-    }  
+        
+        if (isset($value['filter']) ) {
+            $filter_parameters[$id] = $value['filter'];
+        } else {
+            $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
+        }
+    }
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
 $filtered_input = get_filtered_input($form);
 
 var_dump($filtered_input);
-
 ?>
 <html>
     <head>
@@ -108,7 +128,7 @@ var_dump($filtered_input);
         <link rel="stylesheet" href="includes/styles.css">
     </head>
     <body>
-<!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
+        <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
         <?php require 'templates/form.tpl.php'; ?>
