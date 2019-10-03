@@ -1,52 +1,66 @@
+<?php if (isset($form) && !empty($form)): ?>
+    <form <?php print html_attr(($form['attr'] ?? []) + ['method' => 'POST']); ?>>
 
-<form <?php print html_attr(($form['attr'] ?? []) + ['method' => 'POST']); ?>> 
-
-    <!-- Input Field Generation  -->
-    <?php foreach ($form['fields'] ?? [] as $field_id => $field): ?>
-
-        <!-- Check if field array has 'label' and print it in case it is true  -->
-        <?php if (isset($field['label'])) : ?>
-            <label>
-                <span><?php print $field['label']; ?></span>
+        <!--Form Title-->	
+        <?php if (isset($form['title'])): ?>
+            <h2><?php print $form['title'] ?></h2>
         <?php endif; ?>
 
-        <!-- Check if field array has 'type => select' and print it in case it is true  -->
-        <?php if ($field['attr']['type'] == 'select') : ?>
-            <select <?php print html_attr(['name' => $field_id] + ($field['extra_attr'] ?? [])); ?>>
+        <!--Start Field Generation-->
+        <?php foreach ($form['fields'] as $field_id => $field): ?>
+            <div class="field-container">
 
-                <!-- getting option values ant printing them  -->
-                <?php foreach ($field['options'] as $field_value_id => $field_value): ?>
-                    <option value="<?php print $field_value_id; ?>"><?php print $field_value; ?></option>
-                <?php endforeach; ?>
-            </select>
-        <?php else: ?>
+                <!--Label-->
+                <?php if (isset($field['label'])): ?>
+                    <label>
+                        <span class="label"><?php print $field['label']; ?></span>
+                    <?php endif; ?>
 
-            <!--printing inputs with their attributes from form array-->
-            <input <?php print html_attr(['name' => $field_id] + $field['attr'] + ($field['extra_attr'] ?? [])); ?>>
+                    <!--Field-->
+                    <?php if ($field['attr']['type'] === 'select'): ?>
+                        <select <?php print html_attr(['name' => $field_id] + ($field['extra']['attr'] ?? [])); ?>>
+                            <?php foreach ($field['options'] as $option_id => $option): ?>
+                                <option value="<?php print $option_id; ?>" <?php print ($field['attr']['value'] ?? null) === $option_id ? 'selected' : ''  ?>>
+                                    <?php print $option; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <input <?php print html_attr(['name' => $field_id] + $field['attr'] + ($field['extra']['attr'] ?? [])); ?>>
+                    <?php endif; ?>
+
+                    <?php if (isset($field['label'])): ?>
+                    </label>
+                <?php endif; ?>
+
+                <!--Error-->
+                <div class="error">
+                    <?php if (isset($field['error'])): ?>
+                        <span>
+                            <?php print $field['error']; ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        <?php endforeach; ?>
+        <!--End Field Generation-->
+
+        <!--Start Button Generation-->
+        <?php if (isset($form['buttons'])): ?>
+            <?php foreach ($form['buttons'] as $button_id => $button): ?>
+                <div class="button-container">
+                    <input <?php print html_attr(['name' => $button_id] + $button); ?>>
+                </div>
+            <?php endforeach; ?>
         <?php endif; ?>
+        <!--End button Generation-->
 
-        <!-- Check For Error message  -->
-        <?php if (isset($field['error'])) : ?>
-            <div class="color-red"><?php print $field['error'] ?? ''; ?></div>
+        <!--Form Message-->	
+        <?php if (isset($form['message'])): ?>
+            <div class="message">
+                <span><?php print $form['message'] ?></span>
+            </div>
         <?php endif; ?>
-
-        <!-- check if label is set-->
-        <?php if (isset($field['label'])) : ?>
-            </label>
-        <?php endif; ?>
-        <!--end label check-->
-    <?php endforeach; ?>
-
-    <!-- Button Field Generation  -->
-    <?php foreach ($form['buttons'] ?? [] as $button_id => $button): ?>
-        <button <?php print html_attr($button); ?>> <?php print $button_id; ?> </button>
-    <?php endforeach; ?>
-
-    <!--If field array has message key then print the message-->
-    <?php foreach ($form['message'] ?? [] as $value): ?>
-        <?php if (isset($value)) : ?>
-            <p class="color-red"><?php print $value; ?></p>
-        <?php endif; ?> 
-    <?php endforeach; ?>
-</form>
-
+    </form>
+<?php endif; ?>

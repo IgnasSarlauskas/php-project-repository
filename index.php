@@ -2,85 +2,95 @@
 $form = [
     'attr' => [
         'action' => 'index.php',
-        'method' => 'POST',
-        'class' => 'my-form',
-        'id' => 'login-form'
+        'class' => 'bg-black'
     ],
+    'title' => 'Kalėdų norai',
     'fields' => [
-        'first-name' => [
+        'first_name' => [
             'attr' => [
-                'type' => 'text',
+                'type' => 'text'
             ],
-            'extra_attr' => [
-                'placeholder' => 'Your Name', 
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Aurimas',
+                    'class' => 'input-text',
+                    'id' => 'first-name'
+                ]
             ],
-            'label' => 'Name',
-//            'error' => 'error',
+            'label' => 'Vardas:',
+            'error' => 'Vardas per trumpas!'
         ],
-        'last-name' => [
+        'last_name' => [
             'attr' => [
-                'type' => 'text',
+                'type' => 'text'
             ],
-            'extra_attr' => [
-                'placeholder' => 'Your Surname',
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Stecenka',
+                    'class' => 'input-text',
+                    'id' => 'last-name'
+                ]
             ],
-            'label' => 'Surname',
+            'label' => 'Pavardė:',
+            'error' => 'Paliktas tuščias laukas!'
         ],
-        'status' => [
+        'wish' => [
             'attr' => [
                 'type' => 'select',
+                'value' => 'tv'
             ],
-            'extra_attr' => [
-                'placeholder' => 'Your Status',
+            'extra' => [
+                'attr' => [
+                    'class' => 'input-select',
+                    'id' => 'wish'
+                ]
             ],
             'options' => [
-               'single' => 'Single',
-               'married' => 'Married',
-               'divorced' => 'Divorced',
+                'car' => 'BMW',
+                'tv' => 'Teliko',
+                'socks' => 'Kojinių'
             ],
-            'label' => 'Your Status',
-        ],
-        'number' => [
-            'attr' => [
-                'type' => 'number',
-            ],
-            'extra_attr' => [
-                'placeholder' => 'Enter your number',
-            ],
-            'label' => 'Phone Number',
+            'label' => 'Kalėdom noriu:',
         ]
     ],
     'buttons' => [
         'submit' => [
-            'type' => 'button',
+            'type' => 'submit',
+            'value' => 'Siųsti'
         ],
         'reset' => [
-            'type' => 'button',
+            'type' => 'reset',
+            'value' => 'Išvalyti'
         ]
     ],
-    'message' => [
-        'Name field must be filled',
-    ]
+    'message' => 'Formos Message!'
 ];
 
+/**
+ * Generates HTML attributes
+ * @param array $attr
+ * @return string
+ */
 function html_attr($attr) {
-    foreach ($attr as $key => $value) {
-        $attr_array[] = strtr('@key="@value"', [
-            '@key' => $key,
-            '@value' => $value
+    $html_attr_array = [];
+
+    foreach ($attr as $attribute_key => $attribute_value) {
+        $html_attr_array[] = strtr('@key="@value"', [
+            '@key' => $attribute_key,
+            '@value' => $attribute_value
         ]);
     }
-    return implode(" ", $attr_array);
+
+    return implode(' ', $html_attr_array);
 }
 ?>
-
 <html>
-    <style>
-        .color-red {
-            color: red;
-        }
-    </style>
+    <head>
+        <meta charset="UTF-8">
+        <title>Form Templates</title>
+        <link rel="stylesheet" href="includes/styles.css">
+    </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
