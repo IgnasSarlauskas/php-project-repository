@@ -129,7 +129,7 @@ foreach ($form['fields'] as $field_id => &$field) {
     $field_input = $filtered_input[$field_id];
     $field['attr']['value'] = $field_input; 
 
-   var_dump(validate_not_empty($field_input, $field));
+   validate_not_empty($field_input, $field);
     unset($field); 
 }
 
