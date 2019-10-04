@@ -125,13 +125,25 @@ $filtered_input = get_filtered_input($form);
 var_dump($filtered_input);
 
 // All the iput info stays in the field after submitting
-foreach ($form['fields'] as $id => &$value) {
-    $value['attr']['value'] = $filtered_input[$id];
-//  if input field is empty, error occures above the ampty imput field  
-     if ($value['attr']['value'] == '') {
-        $value['error'] = 'Paliktas tuscias laukelis';
-    }
-    unset($value); 
+foreach ($form['fields'] as $field_id => &$field) {
+    $field_input = $filtered_input[$field_id];
+    $field['attr']['value'] = $field_input; 
+
+   var_dump(validate_not_empty($field_input, $field));
+    unset($field); 
+}
+
+/**
+ *if input field is empty, error occures above the empty imput field 
+ * @param $field_input, &$field
+ * @return null | boolean
+ */
+function validate_not_empty($field_input, &$field) {
+    if ($field_input === '') {
+       $field['error'] = 'Paliktas tuscias laukelis';
+   } else {
+       return true;
+   }
 }
 
 ?>
