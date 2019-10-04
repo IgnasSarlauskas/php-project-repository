@@ -20,7 +20,7 @@ $form = [
                 ]
             ],
             'label' => 'Vardas:',
-            'error' => 'Vardas per trumpas!',
+//            'error' => 'Vardas per trumpas!',
             'filter' => FILTER_SANITIZE_NUMBER_INT,
         ],
         'last_name' => [
@@ -35,7 +35,7 @@ $form = [
                 ]
             ],
             'label' => 'Pavardė:',
-            'error' => 'Paliktas tuščias laukas!'
+//            'error' => 'Paliktas tuščias laukas!'
         ],
         'number' => [
             'attr' => [
@@ -49,7 +49,7 @@ $form = [
                 ]
             ],
             'label' => 'Kontaktinis numeris:',
-            'error' => 'Paliktas tuščias laukas!',
+//            'error' => 'Paliktas tuščias laukas!',
         ],
         'wish' => [
             'attr' => [
@@ -127,9 +127,12 @@ var_dump($filtered_input);
 // All the iput info stays in the field after submitting
 foreach ($form['fields'] as $id => &$value) {
     $value['attr']['value'] = $filtered_input[$id];
-    unset($value);
+//  if input field is empty, error occures above the ampty imput field  
+     if ($value['attr']['value'] == '') {
+        $value['error'] = 'Paliktas tuscias laukelis';
+    }
+    unset($value); 
 }
-var_dump($form['fields']['first_name']);
 
 ?>
 <html>
@@ -142,6 +145,6 @@ var_dump($form['fields']['first_name']);
         <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
-<?php require 'templates/form.tpl.php'; ?>
+        <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>

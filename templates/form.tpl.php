@@ -37,7 +37,7 @@
                 <div class="error">
                     <?php if (isset($field['error'])): ?>
                         <span>
-                            <?php print $field['error']; ?>
+                          <?php print $field['error']; ?> 
                         </span>
                     <?php endif; ?>
                 </div>
