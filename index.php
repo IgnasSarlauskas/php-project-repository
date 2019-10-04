@@ -50,7 +50,6 @@ $form = [
             ],
             'label' => 'Kontaktinis numeris:',
             'error' => 'Paliktas tuščias laukas!',
-            
         ],
         'wish' => [
             'attr' => [
@@ -112,21 +111,26 @@ function get_filtered_input($form) {
     $filter_parameters = [];
 
     foreach ($form['fields'] as $id => $value) {
-        $value['value'] == '';
-        if (isset($value['filter']) ) {
+        if (isset($value['filter'])) {
             $filter_parameters[$id] = $value['filter'];
         } else {
             $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
         }
     }
-    
+
     return filter_input_array(INPUT_POST, $filter_parameters);
-    
 }
 
 $filtered_input = get_filtered_input($form);
-
 var_dump($filtered_input);
+
+// All the iput info stays in the field after submitting
+foreach ($form['fields'] as $id => &$value) {
+    $value['attr']['value'] = $filtered_input[$id];
+    unset($value);
+}
+var_dump($form['fields']['first_name']);
+
 ?>
 <html>
     <head>
@@ -138,6 +142,6 @@ var_dump($filtered_input);
         <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
