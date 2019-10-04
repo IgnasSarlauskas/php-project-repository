@@ -40,6 +40,26 @@ $form = [
             'label' => 'Pavardė:',
 //            'error' => 'Paliktas tuščias laukas!'
         ],
+        'age' => [
+            'attr' => [
+                'type' => 'text'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Select your age',
+                    'class' => 'input-number',
+                    'id' => 'age'
+                ]
+            ],
+            'label' => 'Age:',
+//            'error' => 'Paliktas tuščias laukas!',
+            'validate' => [
+                'validate_not_empty',
+                'validate_is_number',
+                'validate_is_positive',
+                'validate_max_100',
+            ]
+        ],
         'number' => [
             'attr' => [
                 'type' => 'number'
@@ -121,7 +141,6 @@ function get_filtered_input($form) {
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-
 /**
  * if input field is empty, error occures above the empty input field 
  * @param $field_input, &$field
@@ -135,6 +154,29 @@ function validate_not_empty($field_input, &$field) {
     }
 }
 
+function validate_is_number($field_input, &$field) {
+    if (!is_numeric($field_input) && !empty($field_input) ) {
+        $field['error'] = 'Iveskite validu skaiciu';
+    } else {
+        return true;
+    }
+}
+
+function validate_is_positive($field_input, &$field) {
+    if ($field_input < 0) {
+        $field['error'] = 'Iveskite teigiama skaiciu';
+    } else {
+        return true;
+    }
+}
+
+function validate_max_100($field_input, &$field) {
+    if ($field_input >= 100) {
+        $field['error'] = 'Ivestas per didelis skaicius';
+    } else {
+        return true;
+    }
+}
 
 /**
  * function that validates form by checking if input field is empty then error occures above the empty input field 
@@ -147,17 +189,16 @@ function validate_form(&$form) {
     foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         $field['attr']['value'] = $field_input;
-        
+
         // calling function to check if the field is empty
-            foreach ($field['validate'] ?? [] as $function_name) {
-                $function_name($field_input, $field); // same as => validate_not_empty($field_input, $field);
-            } 
-        unset($field);  
+        foreach ($field['validate'] ?? [] as $function_name) {
+            $function_name($field_input, $field); // same as => validate_not_empty($field_input, $field);
+        }
+        unset($field);
     }
 }
 
 validate_form($form);
-
 ?>
 <html>
     <head>
@@ -169,6 +210,6 @@ validate_form($form);
         <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
-<?php require 'templates/form.tpl.php'; ?>
+        <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
