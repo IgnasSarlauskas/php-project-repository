@@ -163,7 +163,7 @@ function validate_is_number($field_input, &$field) {
 }
 
 function validate_is_positive($field_input, &$field) {
-    if ($field_input < 0) {
+    if ($field_input <= 0) {
         $field['error'] = 'Iveskite teigiama skaiciu';
     } else {
         return true;
