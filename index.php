@@ -39,6 +39,27 @@ $form = [
             ],
             'label' => 'Pavardė:',
 //            'error' => 'Paliktas tuščias laukas!'
+            'validate' => [
+                'validate_not_empty'
+            ]
+        ],
+        'email' => [
+            'attr' => [
+                'type' => 'text'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Enter Email',
+                    'class' => 'input-email',
+                    'id' => 'email'
+                ]
+            ],
+            'label' => 'Email:',
+            'filter' => FILTER_VALIDATE_EMAIL,
+            'validate' => [
+                'validate_not_empty',
+                'validate_email',
+            ]
         ],
         'age' => [
             'attr' => [
@@ -73,6 +94,9 @@ $form = [
             ],
             'label' => 'Kontaktinis numeris:',
 //            'error' => 'Paliktas tuščias laukas!',
+            'validate' => [
+                'validate_not_empty'
+            ]
         ],
         'wish' => [
             'attr' => [
@@ -91,6 +115,7 @@ $form = [
                 'socks' => 'Kojinių'
             ],
             'label' => 'Kalėdom noriu:',
+            'validate' => [],
         ]
     ],
     'buttons' => [
@@ -103,7 +128,11 @@ $form = [
             'value' => 'Išvalyti'
         ]
     ],
-    'message' => 'Formos Message!'
+    'message' => 'Formos Message!',
+    'callbacks' => [
+        'success' => 'form_success',
+        'fail' => 'form_fail'
+    ]
 ];
 
 /**
@@ -141,6 +170,9 @@ function get_filtered_input($form) {
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
+$filtered_input = get_filtered_input($form);
+var_dump($filtered_input);
+
 /**
  * if input field is empty, error occures above the empty input field 
  * @param $field_input, &$field
@@ -155,7 +187,7 @@ function validate_not_empty($field_input, &$field) {
 }
 
 function validate_is_number($field_input, &$field) {
-    if (!is_numeric($field_input) && !empty($field_input) ) {
+    if (!is_numeric($field_input) && !empty($field_input)) {
         $field['error'] = 'Iveskite validu skaiciu';
     } else {
         return true;
@@ -178,27 +210,60 @@ function validate_max_100($field_input, &$field) {
     }
 }
 
+function validate_email($field_input, &$field) {
+    function valid_email($field_input) {
+        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_input)) ? FALSE : TRUE;
+    }
+    if (!valid_email($field_input)) {
+        $field['error'] = 'Ivestas neteisingas el.pato adresas';
+    } else {
+        return true;
+    }
+}
+
+function form_success($filtered_input, $form) {
+    var_dump('success');
+}
+
+function form_fail($filtered_input, $form) {
+    var_dump('fail');
+}
+
 /**
  * function that validates form by checking if input field is empty then error occures above the empty input field 
  * @param $form
  * @return null 
  */
-function validate_form(&$form) {
-    $filtered_input = get_filtered_input($form);
+$filtered_input = get_filtered_input($form);
+
+function validate_form($filtered_input, &$form) {
+    $success = true;
     // All the iput info stays in the field after submitting
     foreach ($form['fields'] as $field_id => &$field) {
-        $field_input = $filtered_input[$field_id];
-        $field['attr']['value'] = $field_input;
-
-        // calling function to check if the field is empty
-        foreach ($field['validate'] ?? [] as $function_name) {
-            $function_name($field_input, $field); // same as => validate_not_empty($field_input, $field);
+        // if validate array has functions then calling function to check if the field is empty
+        foreach ($field['validate'] as $validator) {
+            $is_valid = $validator($filtered_input[$field_id], $field); // same as => validate_not_empty($field_input, $field);
+            // $is_valid will be false, if validator returns false
+            if (!$is_valid) {
+                $success = false;
+                break;
+            }
         }
-        unset($field);
+        
     }
+    if ($success) {
+        if (isset($form['callbacks']['success'])) {
+            $form['callbacks']['success']($filtered_input, $form);
+        }
+    } else {
+        if (isset($form['callbacks']['fail'])) {
+            $form['callbacks']['fail']($filtered_input, $form);
+        }
+    }
+    return $success;
 }
 
-validate_form($form);
+validate_form($filtered_input, $form);
 ?>
 <html>
     <head>
@@ -210,6 +275,6 @@ validate_form($form);
         <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
