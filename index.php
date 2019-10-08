@@ -9,9 +9,7 @@ $form = [
     'title' => 'Kalėdų norai',
     'fields' => [
         'first_name' => [
-            'attr' => [
-                'type' => 'text'
-            ],
+            'type' => 'text',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Enter Name',
@@ -27,9 +25,7 @@ $form = [
             ]
         ],
         'last_name' => [
-            'attr' => [
-                'type' => 'text'
-            ],
+            'type' => 'text',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Enter Surname',
@@ -44,9 +40,7 @@ $form = [
             ]
         ],
         'email' => [
-            'attr' => [
-                'type' => 'text'
-            ],
+            'type' => 'text',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Enter Email',
@@ -62,9 +56,7 @@ $form = [
             ]
         ],
         'age' => [
-            'attr' => [
-                'type' => 'text'
-            ],
+            'type' => 'text',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Select your age',
@@ -82,9 +74,7 @@ $form = [
             ]
         ],
         'number' => [
-            'attr' => [
-                'type' => 'number'
-            ],
+            'type' => 'number',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Enter Contact Number',
@@ -99,10 +89,8 @@ $form = [
             ]
         ],
         'wish' => [
-            'attr' => [
-                'type' => 'select',
-                'value' => 'tv'
-            ],
+            'type' => 'select',
+            'value' => 'tv',
             'extra' => [
                 'attr' => [
                     'class' => 'input-select',
@@ -181,6 +169,7 @@ var_dump($filtered_input);
 function validate_not_empty($field_input, &$field) {
     if ($field_input === '') {
         $field['error'] = 'Paliktas tuscias laukelis';
+        return false;
     } else {
         return true;
     }
@@ -189,6 +178,8 @@ function validate_not_empty($field_input, &$field) {
 function validate_is_number($field_input, &$field) {
     if (!is_numeric($field_input) && !empty($field_input)) {
         $field['error'] = 'Iveskite validu skaiciu';
+        return false;
+
     } else {
         return true;
     }
@@ -197,6 +188,8 @@ function validate_is_number($field_input, &$field) {
 function validate_is_positive($field_input, &$field) {
     if ($field_input <= 0) {
         $field['error'] = 'Iveskite teigiama skaiciu';
+        return false;
+
     } else {
         return true;
     }
@@ -205,6 +198,8 @@ function validate_is_positive($field_input, &$field) {
 function validate_max_100($field_input, &$field) {
     if ($field_input >= 100) {
         $field['error'] = 'Ivestas per didelis skaicius';
+        return false;
+
     } else {
         return true;
     }
@@ -216,6 +211,7 @@ function validate_email($field_input, &$field) {
     }
     if (!valid_email($field_input)) {
         $field['error'] = 'Ivestas neteisingas el.pato adresas';
+        return false;
     } else {
         return true;
     }
