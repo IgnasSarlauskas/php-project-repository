@@ -179,7 +179,6 @@ function validate_is_number($field_input, &$field) {
     if (!is_numeric($field_input) && !empty($field_input)) {
         $field['error'] = 'Iveskite validu skaiciu';
         return false;
-
     } else {
         return true;
     }
@@ -189,7 +188,6 @@ function validate_is_positive($field_input, &$field) {
     if ($field_input <= 0) {
         $field['error'] = 'Iveskite teigiama skaiciu';
         return false;
-
     } else {
         return true;
     }
@@ -199,16 +197,17 @@ function validate_max_100($field_input, &$field) {
     if ($field_input >= 100) {
         $field['error'] = 'Ivestas per didelis skaicius';
         return false;
-
     } else {
         return true;
     }
 }
 
 function validate_email($field_input, &$field) {
+
     function valid_email($field_input) {
         return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_input)) ? FALSE : TRUE;
     }
+
     if (!valid_email($field_input)) {
         $field['error'] = 'Ivestas neteisingas el.pato adresas';
         return false;
@@ -234,8 +233,11 @@ $filtered_input = get_filtered_input($form);
 
 function validate_form($filtered_input, &$form) {
     $success = true;
+
     // All the iput info stays in the field after submitting
     foreach ($form['fields'] as $field_id => &$field) {
+        $field_input = $filtered_input[$field_id];
+        $field['value'] = $field_input;
         // if validate array has functions then calling function to check if the field is empty
         foreach ($field['validate'] as $validator) {
             $is_valid = $validator($filtered_input[$field_id], $field); // same as => validate_not_empty($field_input, $field);
@@ -245,7 +247,6 @@ function validate_form($filtered_input, &$form) {
                 break;
             }
         }
-        
     }
     if ($success) {
         if (isset($form['callbacks']['success'])) {
@@ -271,6 +272,6 @@ validate_form($filtered_input, $form);
         <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
         <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
         <h2><?php print $_POST['wish'] ?? ''; ?></h2>
-<?php require 'templates/form.tpl.php'; ?>
+        <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
