@@ -224,6 +224,10 @@ function form_fail($filtered_input, $form) {
     var_dump('fail');
 }
 
+if (!empty($filtered_input)) {
+    validate_form($filtered_input, $form);
+}
+
 /**
  * function that validates form by checking if input field is empty then error occures above the empty input field 
  * @param $form
