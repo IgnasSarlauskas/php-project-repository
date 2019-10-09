@@ -54,3 +54,11 @@ function validate_email($field_input, &$field) {
     }
 }
 
+function validate_password($field_input, &$field) {
+     if(strlen($field_input) < 8) {
+         return false;
+     } else {
+         return true;
+     }        
+}
+

@@ -1,6 +1,6 @@
 <?php
 
-
+require 'functions/form/core.php';
 var_dump($_POST);
 
 $form = [
@@ -9,32 +9,31 @@ $form = [
         'class' => 'bg-black'
     ],
     'fields' => [
-        'x' => [
+        'nickname' => [
             'type' => 'text', 
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter number x',
+                    'placeholder' => 'Enter number nickname',
                 ]
             ],
             'label' => '',
-            'filter' => FILTER_SANITIZE_NUMBER_INT,
+            'filter' => '',
             'validate' => [
                 'validate_not_empty',
-                'validate_is_number'
             ]
         ],
-        'y' => [
-            'type' => 'text',
+        'password' => [
+            'type' => 'password',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter number y',
+                    'placeholder' => 'Enter password',
                 ]
             ],
             'label' => '',
-            'filter' => FILTER_SANITIZE_NUMBER_INT,
+            'filter' => '',
             'validate' => [
                 'validate_not_empty',
-                'validate_is_number'
+                'validate_password',
             ]
         ]
     ],
@@ -55,20 +54,18 @@ $form = [
     ]
 ];
 
-require 'functions/form/core.php';
 
-function sum_field_inputs($filtered_input) {
-    $sum = $filtered_input['x'] + $filtered_input['y'] ;
-    var_dump($sum);
-}
 
 function form_success($filtered_input, $form) {
-    sum_field_inputs($filtered_input);
+    var_dump('You are in!');
 }
 
 function form_fail($filtered_input, $form) {
-    var_dump('fail');
+    var_dump('Retard Alert!');
 }
+
+$filtered_input = get_filtered_input($form);
+var_dump($filtered_input);
 
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);

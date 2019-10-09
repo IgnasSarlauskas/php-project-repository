@@ -36,9 +36,6 @@ function get_filtered_input($form) {
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-$filtered_input = get_filtered_input($form);
-var_dump($filtered_input);
-
 /**
  * function that validates form by checking if input field is empty then error occures above the empty input field 
  * @param $form
