@@ -241,6 +241,7 @@ function validate_form($filtered_input, &$form) {
     // All the iput info stays in the field after submitting
     foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
+        // makes input field to stay filled after refershing page
         $field['value'] = $field_input;
         // if validate array has functions then calling function to check if the field is empty
         foreach ($field['validate'] as $validator) {
