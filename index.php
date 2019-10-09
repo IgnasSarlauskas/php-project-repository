@@ -2,128 +2,6 @@
 
 var_dump($_POST);
 
-//$form = [
-//    'attr' => [
-//        'action' => 'index.php',
-//        'class' => 'bg-black'
-//    ],
-//    'title' => 'Kalėdų norai',
-//    'fields' => [
-//        'first_name' => [
-//            'type' => 'text',
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Enter Name',
-//                    'class' => 'input-text',
-//                    'id' => 'first-name'
-//                ]
-//            ],
-//            'label' => 'Vardas:',
-////            'error' => 'Vardas per trumpas!',
-//            'filter' => FILTER_SANITIZE_NUMBER_INT,
-//            'validate' => [
-//                'validate_not_empty'
-//            ]
-//        ],
-//        'last_name' => [
-//            'type' => 'text',
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Enter Surname',
-//                    'class' => 'input-text',
-//                    'id' => 'last-name'
-//                ]
-//            ],
-//            'label' => 'Pavardė:',
-////            'error' => 'Paliktas tuščias laukas!'
-//            'validate' => [
-//                'validate_not_empty'
-//            ]
-//        ],
-//        'email' => [
-//            'type' => 'text',
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Enter Email',
-//                    'class' => 'input-email',
-//                    'id' => 'email'
-//                ]
-//            ],
-//            'label' => 'Email:',
-//            'filter' => FILTER_VALIDATE_EMAIL,
-//            'validate' => [
-//                'validate_not_empty',
-//                'validate_email',
-//            ]
-//        ],
-//        'age' => [
-//            'type' => 'text',
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Select your age',
-//                    'class' => 'input-number',
-//                    'id' => 'age'
-//                ]
-//            ],
-//            'label' => 'Age:',
-////            'error' => 'Paliktas tuščias laukas!',
-//            'validate' => [
-//                'validate_not_empty',
-//                'validate_is_number',
-//                'validate_is_positive',
-//                'validate_max_100',
-//            ]
-//        ],
-//        'number' => [
-//            'type' => 'number',
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Enter Contact Number',
-//                    'class' => 'input-number',
-//                    'id' => 'contact-number'
-//                ]
-//            ],
-//            'label' => 'Kontaktinis numeris:',
-////            'error' => 'Paliktas tuščias laukas!',
-//            'validate' => [
-//                'validate_not_empty'
-//            ]
-//        ],
-//        'wish' => [
-//            'type' => 'select',
-//            'value' => 'tv',
-//            'extra' => [
-//                'attr' => [
-//                    'class' => 'input-select',
-//                    'id' => 'wish'
-//                ]
-//            ],
-//            'options' => [
-//                'car' => 'BMW',
-//                'tv' => 'Teliko',
-//                'socks' => 'Kojinių'
-//            ],
-//            'label' => 'Kalėdom noriu:',
-//            'validate' => [],
-//        ]
-//    ],
-//    'buttons' => [
-//        'submit' => [
-//            'type' => 'submit',
-//            'value' => 'Siųsti'
-//        ],
-//        'reset' => [
-//            'type' => 'reset',
-//            'value' => 'Išvalyti'
-//        ]
-//    ],
-//    'message' => 'Formos Message!',
-//    'callbacks' => [
-//        'success' => 'form_success',
-//        'fail' => 'form_fail'
-//    ]
-//];
-
 $form = [
     'attr' => [
         'action' => 'index.php',
@@ -183,7 +61,6 @@ $form = [
  */
 function html_attr($attr) {
     $html_attr_array = [];
-
     foreach ($attr as $attribute_key => $attribute_value) {
         $html_attr_array[] = strtr('@key="@value"', [
             '@key' => $attribute_key,
@@ -256,7 +133,6 @@ function validate_max_100($field_input, &$field) {
 }
 
 function validate_email($field_input, &$field) {
-
     function valid_email($field_input) {
         return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_input)) ? FALSE : TRUE;
     }
@@ -293,11 +169,8 @@ if (!empty($filtered_input)) {
  * @param $form
  * @return null 
  */
-
-
 function validate_form($filtered_input, &$form) {
     $success = true;
-
     // All the iput info stays in the field after submitting
     foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
@@ -325,8 +198,6 @@ function validate_form($filtered_input, &$form) {
     return $success;
 }
 
-validate_form($filtered_input, $form);
-
 ?>
 <html>
     <head>
@@ -335,9 +206,6 @@ validate_form($filtered_input, $form);
         <link rel="stylesheet" href="includes/styles.css">
     </head>
     <body>
-        <!--        atprintina nora arba varda jeigu (if ??) _POST mastyve yra noras arba vardas-->
-        <h1><?php print $_POST['first_name'] ?? ''; ?></h1>        
-        <h2><?php print $_POST['wish'] ?? ''; ?></h2>
         <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
