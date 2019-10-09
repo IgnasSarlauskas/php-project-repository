@@ -1,5 +1,6 @@
 <?php
 
+
 var_dump($_POST);
 
 $form = [
@@ -54,96 +55,7 @@ $form = [
     ]
 ];
 
-/**
- * Generates HTML attributes
- * @param array $attr
- * @return string
- */
-function html_attr($attr) {
-    $html_attr_array = [];
-    foreach ($attr as $attribute_key => $attribute_value) {
-        $html_attr_array[] = strtr('@key="@value"', [
-            '@key' => $attribute_key,
-            '@value' => $attribute_value
-        ]);
-    }
-
-    return implode(' ', $html_attr_array);
-}
-
-/**
- * Generates safe input array using FILTER_SANITIZE_SPECIAL_CHARS and FILTER_SANITIZE_NUMBER_INT
- * @param array $form array
- * @return array
- */
-function get_filtered_input($form) {
-    $filter_parameters = [];
-    foreach ($form['fields'] as $id => $value) {
-        if (isset($value['filter'])) {
-            $filter_parameters[$id] = $value['filter'];
-        } else {
-            $filter_parameters[$id] = FILTER_SANITIZE_SPECIAL_CHARS;
-        }
-    }
-    return filter_input_array(INPUT_POST, $filter_parameters);
-}
-
-$filtered_input = get_filtered_input($form);
-var_dump($filtered_input);
-
-/**
- * if input field is empty, error occures above the empty input field 
- * @param $field_input, &$field
- * @return null | boolean
- */
-function validate_not_empty($field_input, &$field) {
-    if ($field_input === '') {
-        $field['error'] = 'Paliktas tuscias laukelis';
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validate_is_number($field_input, &$field) {
-    if (!is_numeric($field_input) && !empty($field_input)) {
-        $field['error'] = 'Iveskite validu skaiciu';
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validate_is_positive($field_input, &$field) {
-    if ($field_input <= 0) {
-        $field['error'] = 'Iveskite teigiama skaiciu';
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validate_max_100($field_input, &$field) {
-    if ($field_input >= 100) {
-        $field['error'] = 'Ivestas per didelis skaicius';
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validate_email($field_input, &$field) {
-    function valid_email($field_input) {
-        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_input)) ? FALSE : TRUE;
-    }
-
-    if (!valid_email($field_input)) {
-        $field['error'] = 'Ivestas neteisingas el.pato adresas';
-        return false;
-    } else {
-        return true;
-    }
-}
+require 'functions/form/core.php';
 
 function sum_field_inputs($filtered_input) {
     $sum = $filtered_input['x'] + $filtered_input['y'] ;
@@ -160,40 +72,6 @@ function form_fail($filtered_input, $form) {
 
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
-}
-
-/**
- * function that validates form by checking if input field is empty then error occures above the empty input field 
- * @param $form
- * @return null 
- */
-function validate_form($filtered_input, &$form) {
-    $success = true;
-    // All the iput info stays in the field after submitting
-    foreach ($form['fields'] as $field_id => &$field) {
-        $field_input = $filtered_input[$field_id];
-        // makes input field to stay filled after refershing page
-        $field['value'] = $field_input;
-        // if validate array has functions then calling function to check if the field is empty
-        foreach ($field['validate'] as $validator) {
-            $is_valid = $validator($filtered_input[$field_id], $field); // same as => validate_not_empty($field_input, $field);
-            // $is_valid will be false, if validator returns false
-            if (!$is_valid) {
-                $success = false;
-                break;
-            }
-        }
-    }
-    if ($success) {
-        if (isset($form['callbacks']['success'])) {
-            $form['callbacks']['success']($filtered_input, $form);
-        }
-    } else {
-        if (isset($form['callbacks']['fail'])) {
-            $form['callbacks']['fail']($filtered_input, $form);
-        }
-    }
-    return $success;
 }
 
 ?>
