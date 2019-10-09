@@ -145,12 +145,10 @@ function validate_email($field_input, &$field) {
     }
 }
 
-
 function sum_field_inputs($filtered_input) {
     $sum = $filtered_input['x'] + $filtered_input['y'] ;
     var_dump($sum);
 }
-
 
 function form_success($filtered_input, $form) {
     sum_field_inputs($filtered_input);
