@@ -54,7 +54,7 @@ $form = [
 ];
 
 //var_dump($_POST);
-//$filtered_input = get_filtered_input($form);
+$filtered_input = get_filtered_input($form);
 //var_dump($filtered_input);
 
 function form_success($filtered_input, $form) {
@@ -67,18 +67,26 @@ function form_fail($filtered_input, $form) {
 
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
+    array_to_file($filtered_input, 'array_test.json');
+    file_to_array('array_test.json');
 }
 
-function array_to_file($array, $file) {
+function array_to_file($array, $file_name) {
     $file = json_encode($array);
-    
-    if (file_put_contents($file, $array) === FALSE) {
-        return false;
-    } elseif (file_put_contents($file, $array) == 0 ) {
+    $success = file_put_contents($file_name, $file);
+    if (!$success !== false) {
         return true;
+    }
+    return false;
+}
+
+function file_to_array($file_name) {
+    if (file_exists($file_name)) {
+        $file_got = file_get_contents($file_name);
+        $converted_to_array = json_decode($file_got, true);
     } else {
         return false;
-    }
+    } 
 }
 
 ?>
