@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 
 $form = [
@@ -9,7 +8,7 @@ $form = [
     ],
     'fields' => [
         'nickname' => [
-            'type' => 'text', 
+            'type' => 'text',
             'extra' => [
                 'attr' => [
                     'placeholder' => 'Enter number nickname',
@@ -55,6 +54,7 @@ $form = [
 
 //var_dump($_POST);
 $filtered_input = get_filtered_input($form);
+
 //var_dump($filtered_input);
 
 function form_success($filtered_input, $form) {
@@ -72,8 +72,8 @@ if (!empty($filtered_input)) {
 }
 
 function array_to_file($array, $file_name) {
-    $file = json_encode($array);
-    $success = file_put_contents($file_name, $file);
+    $json_string = json_encode($array);
+    $success = file_put_contents($file_name, $json_string);
     if (!$success !== false) {
         return true;
     }
@@ -82,13 +82,13 @@ function array_to_file($array, $file_name) {
 
 function file_to_array($file_name) {
     if (file_exists($file_name)) {
-        $file_got = file_get_contents($file_name);
-        $converted_to_array = json_decode($file_got, true);
-    } else {
-        return false;
-    } 
+        $json_string = file_get_contents($file_name);
+        if ($json_string !== false) {
+            return json_decode($json_string, true);
+        }
+    }
+    return false;
 }
-
 ?>
 <html>
     <head>
@@ -97,6 +97,6 @@ function file_to_array($file_name) {
         <link rel="stylesheet" href="includes/styles.css">
     </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
