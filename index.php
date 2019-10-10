@@ -1,4 +1,5 @@
 <?php
+
 require 'functions/form/core.php';
 
 $form = [
@@ -59,6 +60,7 @@ $filtered_input = get_filtered_input($form);
 
 function form_success($filtered_input, $form) {
     var_dump('You are in!');
+    update_users($filtered_input);
 }
 
 function form_fail($filtered_input, $form) {
@@ -67,8 +69,6 @@ function form_fail($filtered_input, $form) {
 
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
-    array_to_file($filtered_input, 'array_test.json');
-    file_to_array('array_test.json');
 }
 
 function array_to_file($array, $file_name) {
@@ -89,6 +89,13 @@ function file_to_array($file_name) {
     }
     return false;
 }
+
+function update_users($filtered_input) {
+    $array_users = file_to_array('data_test.json');
+    $array_users[] = $filtered_input;
+    array_to_file($array_users, 'data_test.json');
+}
+
 ?>
 <html>
     <head>
