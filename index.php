@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -62,7 +61,7 @@ $filtered_input = get_filtered_input($form);
 function form_success($filtered_input, $form) {
     var_dump('You are in!');
     update_users($filtered_input);
-    setcookie('mycookie', 'cookiedata', time() + 3600, '/');
+    setcookie('user', 'cookiedata', time() + 3600, '/');
     $_COOKIE['submitted'] = true; // tam,kad nebutu tuscias masyvas ir nereiktu papildomai viena karta refreshint)
 }
 
@@ -81,7 +80,6 @@ function update_users($filtered_input) {
 }
 
 $decoded_user_array = file_to_array('./data/data_test.json');
-
 ?>
 <html>
     <head>
@@ -89,19 +87,26 @@ $decoded_user_array = file_to_array('./data/data_test.json');
         <title>Form Templates</title>
         <link rel="stylesheet" href="includes/styles.css">
     </head>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+    </style>
     <body>
-        <?php if(empty($_COOKIE)):?>
+        <?php if (empty($_COOKIE['user'])): ?>
             <?php require 'templates/form.tpl.php'; ?>
         <?php else: ?>
-            <section>
-                <?php if (!empty($decoded_user_array)): ?>
+            <?php if (!empty($decoded_user_array)): ?>
+                <table>
                     <?php foreach ($decoded_user_array as $user): ?>
-                        <?php foreach ($user as $index => $value): ?>
-                            <p><?php print "$index : $value"; ?></p>
-                        <?php endforeach; ?>
+                        <tr>
+                            <?php foreach ($user as $index => $value): ?>
+                                <td><?php print $index . ':' . $value; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
                     <?php endforeach; ?>
-                <?php endif; ?>
-            </section>
+                </table>
+            <?php endif; ?>
         <?php endif; ?>
     </body>
 </html>
