@@ -63,6 +63,7 @@ function form_success($filtered_input, $form) {
     var_dump('You are in!');
     update_users($filtered_input);
     setcookie('mycookie', 'cookiedata', time() + 3600, '/');
+    $_COOKIE['submitted'] = true; // tam,kad nebutu tuscias masyvas ir nereiktu papildomai viena karta refreshint)
 }
 
 function form_fail($filtered_input, $form) {
