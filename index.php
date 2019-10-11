@@ -67,6 +67,8 @@ function form_success($filtered_input, $form) {
 
 function form_fail($filtered_input, $form) {
     var_dump('Retard Alert!');
+    $json_string = json_encode($filtered_input); 
+    setcookie('fields' ,$json_string, time() + 3600, '/'); /// set cookie priima tik string values !!!
 }
 
 if (!empty($filtered_input)) {
@@ -80,6 +82,18 @@ function update_users($filtered_input) {
 }
 
 $decoded_user_array = file_to_array('./data/data_test.json');
+
+var_dump($_COOKIE);
+
+if (isset($_COOKIE['fields'])) {
+    $decoded_array = json_decode($_COOKIE['fields'], true);
+    foreach($form['fields'] as $field_id => &$field) {
+        var_dump($field_id);
+        $field['value'] = $decoded_array[$field_id];
+    }
+    unset($field);
+}
+
 ?>
 <html>
     <head>
@@ -101,7 +115,7 @@ $decoded_user_array = file_to_array('./data/data_test.json');
                     <?php foreach ($decoded_user_array as $user): ?>
                         <tr>
                             <?php foreach ($user as $index => $value): ?>
-                                <td><?php print $index . ':' . $value; ?></td>
+                                <td><?php print $index . ': ' . $value; ?></td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endforeach; ?>
