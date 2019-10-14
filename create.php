@@ -5,7 +5,7 @@ require 'functions/file.php';
 
 $form = [
     'attr' => [
-        'action' => 'index.php',
+        'action' => 'create.php',
     ],
     'fields' => [
         'nickname' => [
