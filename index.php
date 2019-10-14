@@ -58,7 +58,7 @@ function update_users($filtered_input) {
     array_to_file($array_users, './data/data_test.json');
 }
 $decoded_user_array = file_to_array('./data/data_test.json');
-var_dump($_COOKIE);
+
 if (isset($_COOKIE['fields'])) {
     $decoded_array = json_decode($_COOKIE['fields'], true);
     foreach($form['fields'] as $field_id => &$field) {
