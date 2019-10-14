@@ -1,4 +1,5 @@
 <?php
+
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -33,35 +34,35 @@ $form = [
     ]
 ];
 
-$teams = [
-    [
-      'team_name'  => 'lochai',
-        'players' => [
-            [
-                'nickname' => 'killer',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'thriller',
-                'score' => 10
-            ]
-        ]
-    ],
-    
-    [
-      'team_name'  => 'nelochai',
-        'players' => [
-            [
-                'nickname' => 'winner',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'newinner',
-                'score' => 10
-            ]
-        ]
-    ],   
-];
+//$teams = [
+//    [
+//      'team_name'  => 'lochai',
+//        'players' => [
+//            [
+//                'nickname' => 'killer',
+//                'score' => 10
+//            ],
+//            [
+//                'nickname' => 'thriller',
+//                'score' => 10
+//            ]
+//        ]
+//    ],
+//    
+//    [
+//      'team_name'  => 'nelochai',
+//        'players' => [
+//            [
+//                'nickname' => 'winner',
+//                'score' => 10
+//            ],
+//            [
+//                'nickname' => 'newinner',
+//                'score' => 10
+//            ]
+//        ]
+//    ],   
+//];
 //var_dump($_POST);
 $filtered_input = get_filtered_input($form);
 
@@ -84,12 +85,12 @@ if (!empty($filtered_input)) {
 }
 
 function update_users($filtered_input) {
-    $array_users = file_to_array('./data/data_test.json');
+    $array_users = file_to_array('./data/teams.json');
     $array_users[] = $filtered_input;
-    array_to_file($array_users, './data/data_test.json');
+    array_to_file($array_users, './data/teams.json');
 }
 
-$decoded_user_array = file_to_array('./data/data_test.json');
+$decoded_user_array = file_to_array('./data/teams.json');
 
 if (isset($_COOKIE['fields'])) {
     $decoded_array = json_decode($_COOKIE['fields'], true);
