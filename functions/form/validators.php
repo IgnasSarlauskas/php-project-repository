@@ -42,6 +42,7 @@ function validate_max_100($field_input, &$field) {
 }
 
 function validate_email($field_input, &$field) {
+
     function valid_email($field_input) {
         return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_input)) ? FALSE : TRUE;
     }
@@ -55,10 +56,37 @@ function validate_email($field_input, &$field) {
 }
 
 function validate_password($field_input, &$field) {
-     if(strlen($field_input) < 8) {
-         return false;
-     } else {
-         return true;
-     }        
+    if (strlen($field_input) < 8) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
+function validate_team($field_input, &$field) {
+    $teams_array = file_to_array('data/teams.json');
+    if (!empty($teams_array)) {
+        foreach ($teams_array as $team) {
+            if ($field_input === $team['team_name']) {
+                $field['error'] = 'Toks komandos pavadinimas jau yra!';
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function validate_player($field_input, &$field) {
+    $teams_array = file_to_array('data/teams.json');
+    if (!empty($teams_array)) {
+        foreach ($teams_array as $team) {
+            foreach ($team['players'] as $player) {
+                if ($field_input === $player) {
+                    $field['error'] = 'Toks zaidejas jau yra!';
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
