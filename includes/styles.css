@@ -3,6 +3,10 @@
     font-size: 12px;
 }
 
+html body {
+    font-family: 'Glegoo', serif;
+}
+
 form {
     border: 1px solid black;
     padding: 15px;
@@ -11,7 +15,7 @@ form {
     box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);  
     /*6 lines that makes form centerde*/
     left: 50%;
-    top: 50%;
+    top: 65%;
     position: absolute;
     -webkit-transform: translate3d(-50%, -50%, 0);
     -moz-transform: translate3d(-50%, -50%, 0);
@@ -55,5 +59,6 @@ form {
     font-size: 16px;
     padding: 12px 20px;
     margin: 8px 0;
+    font-family: 'Glegoo', serif; 
 }
 

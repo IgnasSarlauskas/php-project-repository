@@ -104,10 +104,13 @@ if (isset($_COOKIE['fields'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Form Templates</title>
+        <title>Create Team</title>
         <link rel="stylesheet" href="includes/styles.css">
+        <link rel="stylesheet" href="includes/navigation-style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     </head>
     <body>
+        <?php include 'navigation.php'; ?>
         <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
