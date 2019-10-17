@@ -7,7 +7,7 @@
         <?php endif; ?>
 
         <!--Start Field Generation-->
-        <?php foreach ($form['fields'] as $field_id => $field): ?>
+        <?php foreach (($form['fields'] ?? []) as $field_id => $field): ?>
             <div class="field-container">
 
                 <!--Label-->

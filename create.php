@@ -35,34 +35,6 @@ $form = [
     ]
 ];
 
-$teams = [
-    [
-        'team_name' => 'lochai',
-        'players' => [
-            [
-                'nickname' => 'killer',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'thriller',
-                'score' => 10
-            ]
-        ]
-    ],
-    [
-        'team_name' => 'nelochai',
-        'players' => [
-            [
-                'nickname' => 'winner',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'newinner',
-                'score' => 10
-            ]
-        ]
-    ],
-];
 
 //var_dump($filtered_input);
 function form_success($filtered_input, $form) {

@@ -6,7 +6,9 @@
 html body {
     font-family: 'Glegoo', serif;
 }
-
+.text-centered {
+    text-align: center;
+}
 form {
     border: 1px solid black;
     padding: 15px;
@@ -25,6 +27,10 @@ form {
 
 .field-container {
     margin: 5px;
+}
+
+#player {
+    display: none;
 }
 
 .nickname {

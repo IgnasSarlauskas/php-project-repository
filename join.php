@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -14,6 +13,7 @@ $form = [
                 'attr' => [
                     'placeholder' => 'Nickname',
                     'class' => 'nickname',
+                    'id' => 'player',
                 ]
             ],
             'validate' => [
@@ -27,7 +27,8 @@ $form = [
             'extra' => [
                 'attr' => [
                     'class' => 'select-team',
-                    'id' => 'team'
+                    'id' => 'team',
+                    'onclick' => 'show()',
                 ]
             ],
             'options' => select_teams(),
@@ -47,35 +48,6 @@ $form = [
         'success' => 'form_success',
         'fail' => 'form_fail'
     ]
-];
-
-$teams = [
-    [
-        'team_name' => 'lochai',
-        'players' => [
-            [
-                'nickname' => 'killer',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'thriller',
-                'score' => 10
-            ]
-        ]
-    ],
-    [
-        'team_name' => 'nelochai',
-        'players' => [
-            [
-                'nickname' => 'winner',
-                'score' => 10
-            ],
-            [
-                'nickname' => 'newinner',
-                'score' => 10
-            ]
-        ]
-    ],
 ];
 
 //var_dump($filtered_input);
@@ -107,8 +79,15 @@ if (!empty($filtered_input)) {
 
 function add_players($filtered_input) {
     $array_teams = file_to_array('./data/teams.json');
-    $array_teams[$filtered_input['team_name']]['players'][] = $filtered_input['player'];
-    array_to_file($array_teams, './data/teams.json');
+    foreach ($array_teams as &$team) {
+        if ($team['team_name'] === $filtered_input['team_name']) {
+            $team['players'][] = [
+                'nickname' => $filtered_input['player'],
+                'score' => 0,
+            ];
+        }
+    }
+    array_to_file($array_teams, 'data/teams.json');
 }
 
 function update_users($filtered_input) {
@@ -122,7 +101,7 @@ function select_teams() {
     $array_teams = file_to_array('./data/teams.json');
     if (!empty($array_teams)) {
         foreach ($array_teams as $value) {
-            $arr[] = $value['team_name'];
+            $arr[$value['team_name']] = $value['team_name'];
         }
         return $arr;
     }
@@ -130,36 +109,43 @@ function select_teams() {
 
 if (!empty($_COOKIE['player'])) {
     $player = json_decode($_COOKIE['player'], true);
-    $joined_text = "Sveeiks, pzdaball zaidejau \"{$player['nickname']}\" iš komandos \"{$player['team_name']}\".";
+    $joined_text = "Hello, pzdaball player \"{$player['nickname']}\" from team \"{$player['team_name']}\", you can play now !";
 } else {
-    $joined_text = 'Welcome player !';
+    $joined_text = 'Welcome player, click play !';
 }
 
 $array_teams = file_to_array('./data/teams.json'); // This must by in the plain code for the html logic below to dont allow crete player if there are no teams created
-
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Join Team</title>
         <link rel="stylesheet" href="includes/styles.css">
+        <link rel="stylesheet" href="includes/player-success-animation.css">
         <link rel="stylesheet" href="includes/navigation-style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Glegoo|Roboto+Slab&display=swap" rel="stylesheet">
     </head>
 
-    <body>
+    <script>
+        function show() {
+            document.getElementById('player').style.display = 'inline-block';
+        }
+
+    </script>
+
+    <body> 
         <?php include 'navigation.php'; ?>
         <?php if (empty($array_teams)): ?>
             <h2>There are no teams to join, create team first!</h2>
         <?php else: ?> 
-            <?php require 'templates/form.tpl.php'; ?>
-        <?php endif; ?>
-
-        <?php if (!empty($_COOKIE)) : ?>  
-            <p><?php print $joined_text; ?></p>  
+            <?php if (!empty($_COOKIE)) : ?>  
+                <p class="text-centered"><?php print $joined_text; ?></p>
+                <div id="hide-me" class='spiralContainer'><div class='spiral'></div></div>
             <?php else: ?> 
-            <p><?php print $joined_text; ?></p> 
+                <p class="text-centered"><?php print $joined_text; ?></p>
+                <?php require 'templates/form.tpl.php'; ?>
+            <?php endif; ?> 
         <?php endif; ?>
     </body>
 </html>

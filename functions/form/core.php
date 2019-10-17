@@ -44,12 +44,12 @@ function get_filtered_input($form) {
 function validate_form($filtered_input, &$form) {
     $success = true;
     // All the iput info stays in the field after submitting
-    foreach ($form['fields'] as $field_id => &$field) {
+    foreach (($form['fields'] ?? []) as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         // makes input field to stay filled after refershing page
         $field['value'] = $field_input;
         // if validate array has functions then calling function to check if the field is empty
-        foreach ($field['validate'] as $validator) {
+        foreach (($field['validate'] ?? []) as $validator) {
             $is_valid = $validator($filtered_input[$field_id], $field); // same as => validate_not_empty($field_input, $field);
             // $is_valid will be false, if validator returns false
             if (!$is_valid) {
@@ -58,6 +58,15 @@ function validate_form($filtered_input, &$form) {
             }
         }
     }
+
+    foreach (($form['validators'] ?? []) as $validator) {
+        $valid = $validator($filtered_input, $form);
+        if (!$valid) {
+            $success = true;
+            break;
+        }
+    }
+
     if ($success) {
         if (isset($form['callbacks']['success'])) {
             $form['callbacks']['success']($filtered_input, $form);

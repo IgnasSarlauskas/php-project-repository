@@ -1,0 +1,16 @@
+
+div {
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+    -webkit-animation: myfirst 5s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation: myfirst 5s ;
+    animation-fill-mode: forwards; /* makes go down */
+}
+
+@-webkit-keyframes myfirst {
+    0%   { left: 0px; top: 0px;}
+    100% { left: 0px; top: 800px;}
+}
