@@ -81,7 +81,7 @@ function validate_player($field_input, &$field) {
     if (!empty($teams_array)) {
         foreach ($teams_array as $team) {
             foreach ($team['players'] as $player) {
-                if ($field_input === $player) {
+                if ($field_input === $player['nickname']) {
                     $field['error'] = 'Toks zaidejas jau yra!';
                     return false;
                 }
@@ -93,11 +93,9 @@ function validate_player($field_input, &$field) {
 
 function validate_kick($field_input, &$field) {
     $teams = file_to_array('data/teams.json');
-    $player_cookie = json_decode($_COOKIE['player'], true);
-  
         foreach ($teams as &$team) {
             foreach ($team['players'] as &$player) {
-                if ($player['nickname'] === $player_cookie['nickname']) {
+                if ($player['nickname'] === $_SESSION['nickname']) {
                     return true;
                 } else {
                     return false;

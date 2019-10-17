@@ -1,8 +1,9 @@
 
-div {
-    width: 100px;
-    height: 100px;
-    background: red;
+#join-fail {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background-image: url(../includes/img/mario-fail2.jpg);
     position: relative;
     -webkit-animation: myfirst 5s; /* Safari 4.0 - 8.0 */
     -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
@@ -10,7 +11,16 @@ div {
     animation-fill-mode: forwards; /* makes go down */
 }
 
+start {
+    opacity:1;
+    transition:opacity 500ms;
+}
+
+.end {
+    opacity:0;
+}
+
 @-webkit-keyframes myfirst {
     0%   { left: 0px; top: 0px;}
-    100% { left: 0px; top: 800px;}
+    100% { left: 0px; top: 750px;}
 }

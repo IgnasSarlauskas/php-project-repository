@@ -1,7 +1,7 @@
 .spiralContainer {
     border-radius: 50%;
-    width:650px;
-    height:650px;
+    width:500px;
+    height:500px;
     overflow:hidden;
     margin:20px;
     margin: 0 auto;
@@ -19,10 +19,10 @@
     animation-play-state: paused;
 }
 .spiral {
-    width:650px;
-    height:650px;
+    width:500px;
+    height:500px;
     border-radius: 50%;
-    background-image: url(../includes/img/mario.jpg);
+    background-image: url(../includes/img/mario1.jpg);
     background-repeat:no-repeat;
     background-position:50% 50%;
 

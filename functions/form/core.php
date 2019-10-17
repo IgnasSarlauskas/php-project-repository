@@ -44,7 +44,7 @@ function get_filtered_input($form) {
 function validate_form($filtered_input, &$form) {
     $success = true;
     // All the iput info stays in the field after submitting
-    foreach (($form['fields'] ?? []) as $field_id => &$field) {
+    foreach ($form['fields']   as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         // makes input field to stay filled after refershing page
         $field['value'] = $field_input;
@@ -58,12 +58,13 @@ function validate_form($filtered_input, &$form) {
             }
         }
     }
-
-    foreach (($form['validators'] ?? []) as $validator) {
-        $valid = $validator($filtered_input, $form);
-        if (!$valid) {
-            $success = true;
-            break;
+    if (!$success) {
+        foreach (($form['validate'] ?? []) as $validator) {
+            $valid = $validator($filtered_input, $form);
+            if (!$valid) {
+                $success = false;
+                break;
+            }
         }
     }
 

@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+unset($_SESSION['nickname']);
+unset($_SESSION['team_name']);
+unset($_SESSION['score']);
+
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -44,8 +49,6 @@ function form_success($filtered_input, $form) {
 
 function form_fail($filtered_input, $form) {
     var_dump('Retard Alert!');
-    $json_string = json_encode($filtered_input);
-    setcookie('fields', $json_string, time() + 3600, '/'); /// set cookie priima tik string values !!!
 }
 
 //var_dump($_POST);
@@ -64,13 +67,13 @@ function update_users($filtered_input) {
 
 $decoded_user_array = file_to_array('./data/teams.json');
 
-if (isset($_COOKIE['fields'])) {
-    $decoded_array = json_decode($_COOKIE['fields'], true);
-    foreach ($form['fields'] as $field_id => &$field) {
-        $field['value'] = $decoded_array[$field_id];
-    }
-    unset($field);
-}
+//if (isset($_SESSION)) {
+//    foreach ($form['fields'] as $field_id => &$field) {
+//        $field['value'] = $_SESSION[$field_id];
+//        var_dump($field['value']);
+//    }
+//    unset($field);
+//}
 
 ?>
 <html>
@@ -78,12 +81,17 @@ if (isset($_COOKIE['fields'])) {
         <meta charset="UTF-8">
         <title>Create Team</title>
         <link rel="stylesheet" href="includes/styles.css">
+        <link rel="stylesheet" href="includes/player-fail-animation.css">
         <link rel="stylesheet" href="includes/navigation-style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     </head>
     <body>
         <?php include 'navigation.php'; ?>
         <?php require 'templates/form.tpl.php'; ?>
+        
+        <?php if (isset($form['fields']['team_name']['error'])): ?>  
+               <div id="join-fail" class="start"></div>  
+        <?php endif; ?>
     </body>
 </html>
 

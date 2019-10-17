@@ -1,4 +1,9 @@
 <?php
+session_start();
+unset($_SESSION['nickname']);
+unset($_SESSION['team_name']);
+unset($_SESSION['score']);
+
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -54,24 +59,21 @@ $form = [
 function form_success($filtered_input, $form) {
     var_dump('You are in!');
     add_players($filtered_input);
-    $player = [
-        'team_name' => $filtered_input['team_name'],
-        'nickname' => $filtered_input['player'],
-    ];
-    setcookie('player', json_encode($player), time() + 3600, '/');
-    $_COOKIE['submitted'] = true;
-}
 
-var_dump($_COOKIE);
+    $_SESSION['nickname'] = $filtered_input['player'];
+    $_SESSION['team_name'] = $filtered_input['team_name'];
+    $_SESSION['score'] = 0;
+
+    
+}
 
 function form_fail($filtered_input, $form) {
     var_dump('Retard Alert!');
-//    $json_string = json_encode($filtered_input);
-//    setcookie('fields', $json_string, time() + 3600, '/'); /// set cookie priima tik string values !!!
 }
 
 //var_dump($_POST);
 $filtered_input = get_filtered_input($form);
+
 
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
@@ -107,14 +109,16 @@ function select_teams() {
     }
 }
 
-if (!empty($_COOKIE['player'])) {
-    $player = json_decode($_COOKIE['player'], true);
-    $joined_text = "Hello, pzdaball player \"{$player['nickname']}\" from team \"{$player['team_name']}\", you can play now !";
+if (!empty($_SESSION)) {
+    $joined_text = "Hello, pzdaball player \"{$_SESSION['nickname']}\" from team \"{$_SESSION['team_name']}\", you can play now !";
+} elseif (empty($_SESSION)) {
+    $joined_text = 'Welcome aboard player! Enter your name!';
 } else {
-    $joined_text = 'Welcome player, click play !';
+    $joined_text = 'Player name already exists, try again !';
 }
 
 $array_teams = file_to_array('./data/teams.json'); // This must by in the plain code for the html logic below to dont allow crete player if there are no teams created
+    
 ?>
 <html>
     <head>
@@ -122,6 +126,7 @@ $array_teams = file_to_array('./data/teams.json'); // This must by in the plain 
         <title>Join Team</title>
         <link rel="stylesheet" href="includes/styles.css">
         <link rel="stylesheet" href="includes/player-success-animation.css">
+        <link rel="stylesheet" href="includes/player-fail-animation.css">
         <link rel="stylesheet" href="includes/navigation-style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Glegoo|Roboto+Slab&display=swap" rel="stylesheet">
@@ -131,22 +136,31 @@ $array_teams = file_to_array('./data/teams.json'); // This must by in the plain 
         function show() {
             document.getElementById('player').style.display = 'inline-block';
         }
-
+        
+        setTimeout(function(){
+            document.getElementById('join-fail').className = 'end';
+        }, 5000);
     </script>
 
     <body> 
         <?php include 'navigation.php'; ?>
+        
         <?php if (empty($array_teams)): ?>
             <h2>There are no teams to join, create team first!</h2>
         <?php else: ?> 
-            <?php if (!empty($_COOKIE)) : ?>  
-                <p class="text-centered"><?php print $joined_text; ?></p>
+            <?php if (!empty($_SESSION)) : ?>  
+                <p class="centered"><?php print $joined_text; ?></p>
                 <div id="hide-me" class='spiralContainer'><div class='spiral'></div></div>
-            <?php else: ?> 
-                <p class="text-centered"><?php print $joined_text; ?></p>
-                <?php require 'templates/form.tpl.php'; ?>
+            <?php elseif (empty($_SESSION)): ?> 
+                <p class="centered"><?php print $joined_text; ?></p>
+                    <?php require 'templates/form.tpl.php'; ?> 
             <?php endif; ?> 
         <?php endif; ?>
+          
+        <?php if (isset($form['fields']['player']['error'])): ?>  
+               <div id="join-fail" class="start"></div>  
+        <?php endif; ?>
+                
     </body>
 </html>
 

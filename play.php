@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+
+
 require 'functions/form/core.php';
 require 'functions/file.php';
 
@@ -14,7 +18,7 @@ $form = [
             'class' => 'submit-button',
         ],
     ],
-    'validators' => [
+    'validate' => [
         'validate_kick'
     ],
     'callbacks' => [
@@ -24,9 +28,9 @@ $form = [
 ];
 
 
-if (!empty($_COOKIE)) {
-    $player_cookie = json_decode($_COOKIE['player'], true);
-    $play_text = "Go for it, \"{$player_cookie['nickname']}\" ! ";
+if (!empty($_SESSION)) {
+//    $player_cookie = json_decode($_COOKIE['player'], true);
+    $play_text = "Go for it, \"{$_SESSION['nickname']}\" ! ";
 }
 
 function form_fail () {}
@@ -34,11 +38,9 @@ function form_fail () {}
 //var_dump(filter_input(INPUT_POST, 'start', FILTER_DEFAULT , FILTER_REQUIRE_ARRAY));
 function form_success() {
     $teams = file_to_array('./data/teams.json');
-    $player_cookie = json_decode($_COOKIE['player'], true);
-    var_dump($player_cookie);
     foreach ($teams as &$team) {
         foreach ($team['players'] as &$player) {
-            if ($player['nickname'] === $player_cookie['nickname']) {
+            if ($player['nickname'] === $_SESSION['nickname']) {
                 $player['score']++;
             }
         }
@@ -53,9 +55,7 @@ $filtered_input = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_SPECIAL_CHA
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
     var_dump($filtered_input);
-} else {
-    echo 'upsss error';
-}
+} 
 
 ?>
 <html>
@@ -69,11 +69,9 @@ if (!empty($filtered_input)) {
     </head>
     <body>
         <?php include 'navigation.php'; ?>
-        <?php require 'templates/form.tpl.php'; ?>
-        
-        <?php if (!empty($_COOKIE)) : ?> 
-            <h2><?php print $play_text; ?> </h2>
-        <?php endif; ?>
-            
+        <?php if (!empty($_SESSION)) : ?> 
+            <h2 class="centered"><?php print $play_text; ?> </h2>
+            <?php require 'templates/form.tpl.php'; ?>
+        <?php endif; ?>    
     </body>
 </html>
