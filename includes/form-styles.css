@@ -15,7 +15,7 @@ form {
     -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);  
-    /*6 lines that makes form centerde*/
+    /*6 lines that makes form centered*/
     left: 50%;
     top: 45%;
     position: absolute;
@@ -29,11 +29,7 @@ form {
     margin: 5px;
 }
 
-#player {
-    display: none;
-}
-
-.nickname {
+.full-name {
     font-size: 16px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -42,7 +38,16 @@ form {
     box-sizing: border-box;
 }
 
-.select-team {
+.email  {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.password {
     font-size: 16px;
     padding: 12px 20px;
     margin: 8px 0;
