@@ -85,6 +85,11 @@ $decoded_user_array = file_to_array('./data/teams.json');
         <link rel="stylesheet" href="includes/navigation-style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     </head>
+    <script>
+        setTimeout(function(){
+            document.getElementById('join-fail').className = 'end';
+        }, 5000);
+    </script>
     <body>
         <?php include 'navigation.php'; ?>
         <?php require 'templates/form.tpl.php'; ?>
